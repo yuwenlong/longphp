@@ -1,7 +1,7 @@
 <?php
 if(DEBUG){
     ini_set('display_errors', 1);
-    error_reporting(E_ALL);
+    error_reporting(E_ERROR | E_WARNING | E_PARSE);
 }else {
     ini_set('display_errors', 0);
     error_reporting(0);
