@@ -11,7 +11,10 @@ function send_mail($tomail, $subject, $body, $cc = null){
     $mail->FromName = 'php team';
     $mail->CharSet = "UTF-8";
     $mail->Encoding = "base64";
-    $mail->AddAddress($tomail);
+    $tomail = explode(',', $tomail);
+    foreach((array)$tomail as $v){
+        $mail->AddAddress($v);
+    }
     $mail->AddReplyTo("php@php.net","php.net");
     $mail->IsHTML(true);
     $mail->Subject = $subject;
@@ -19,7 +22,10 @@ function send_mail($tomail, $subject, $body, $cc = null){
     $mail->AltBody = 'text/html';
 
     if(!empty($cc)){
-        $mail->AddCC($cc);
+        $cc = explode(',', $cc);
+        foreach((array)$cc as $v){
+            $mail->AddCC($v);
+        }
     }
 
     if($mail->Send()){
