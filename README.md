@@ -4,6 +4,7 @@ longphp
 A simple php framework <br />
 作者微博：<a href="http://weibo.com/206123787" target="_blank">http://weibo.com/206123787</a><br />
 作者邮箱：<a href="mailto:yuwenlong@wenlong.pw">yuwenlong@wenlong.pw</a><br />
+框架应用说明：<a href="http://www.wenlong.pw/category/kuangjia">框架应用说明</a><br />
 测试地址：<br />
 普通：http://localhost/longphp <br />
 smarty: http://localhost/longphp/?c=smarty <br />
