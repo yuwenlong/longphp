@@ -33,9 +33,6 @@ abstract class Libs{
         if(!empty($this->is_smarty)){
             require_once DIR_CONF.'smarty.conf.php';
             $this->smarty = $smarty;
-            if(DEBUG){
-                $this->smarty->debugging = true;
-            }
         }
     }
 	
