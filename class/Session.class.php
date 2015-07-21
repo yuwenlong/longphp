@@ -38,8 +38,11 @@ class Session {
             'last_time' => $_SERVER['REQUEST_TIME'],
             'content' => $paras
         );
-        $this->db->replace_into('session', $arr);
-        return true;
+        if($this->db->replace_into('session', $arr)){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     function del_session($sid){
@@ -48,7 +51,7 @@ class Session {
     }
 
     function get_session($sid){
-        $sql = 'SELECT `content` FROM `session` WHERE `session_id` = \''.$sid.'\'';
+        $sql = 'SELECT `content` FROM `session` WHERE `session_id` = \''.$sid.'\' LIMIT 1';
         $content = $this->db->fetchFirst($sql);
         return empty($content) ? NULL : unserialize($content['content']);
     }
