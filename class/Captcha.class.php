@@ -1,4 +1,8 @@
-<?php 
+<?php
+if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
+
 session_start(); 
 class Captcha { 
     //图片对象、宽度、高度、验证码长度 

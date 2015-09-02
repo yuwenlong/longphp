@@ -4,6 +4,10 @@
  *
  * 使用方法 $this->load_class('verification_code');
  * */
+ if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
+ 
 session_start();
 $randCode = '';
 $chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPRSTUVWXYZ23456789';

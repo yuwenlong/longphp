@@ -1,4 +1,8 @@
 <?php
+if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
+
 class Mysql {
 	public $conn;
 	public $prefix;

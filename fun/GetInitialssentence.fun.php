@@ -4,6 +4,10 @@
  * @param string $str
  * @return string
  */
+ if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
+ 
 function getFirstLetter_GBK($str) {
 
 	$asc = ord ( substr ( $str, 0, 1 ) );

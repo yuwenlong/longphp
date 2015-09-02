@@ -1,4 +1,8 @@
 <?php
+if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
+
 function curl($url, $t = 'GET', $data = '', $header = array()){
     $ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);

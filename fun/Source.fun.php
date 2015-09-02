@@ -1,4 +1,8 @@
 <?php
+if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
+
 function autoload($classname){
 	global $file;
 	$action = 'Action_'.$classname;

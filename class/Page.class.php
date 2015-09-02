@@ -10,6 +10,10 @@
  *
  *  author          于文龙
  **/
+ if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
+ 
 class Page{
     static public function show($num, $pagesize, $nowpage, $urlcode = 'page', $pagenum = 5){
         $zpage = ceil($num / $pagesize);

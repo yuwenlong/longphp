@@ -1,4 +1,8 @@
 <?php
+if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
+
 return array(
     'db1' => array(
         'host' => '127.0.0.1',

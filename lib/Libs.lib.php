@@ -1,4 +1,8 @@
 <?php
+if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
+
 abstract class Libs{
     abstract protected function init();
     abstract protected function main();

@@ -1,5 +1,9 @@
 <?php
 if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
+
+if(!defined('DIR')){
     exit('请正确访问URL');
 }
 

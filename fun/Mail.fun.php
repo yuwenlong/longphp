@@ -1,4 +1,8 @@
 <?php
+if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
+
 function send_mail($tomail, $subject, $body, $cc = null){
     require_once DIR_CLASS.'phpmail/class.phpmailer.php';
     $mail = new PHPMailer();

@@ -1,4 +1,7 @@
 <?php
+if(!defined('DIR')){
+	exit('Please correct access URL.');
+}
 
 class bihua
 {
