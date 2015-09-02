@@ -133,11 +133,20 @@ abstract class Libs{
     }
 
     public function load_fun($fun_name){
-        if(file_exists(DIR_FUN.ucwords(strtolower($fun_name)).'.fun.php')){
-            require_once DIR_FUN.ucwords(strtolower($fun_name)).'.fun.php';
+        $arr = explode('/', $model);
+        $file = '';
+        $count = count($arr) - 1;
+        for($i = 0; $i < $count; $i++){
+            $file .= $arr[$i].'/';
+        }
+        $filename = ucfirst($arr[$count]);
+        $file .= $filename.'.fun.php';
+
+        if(file_exists(DIR_FUN.$file){
+            require_once DIR_FUN.$file;
         }else {
             if(DEBUG){
-                exit('函数文件：'.ucwords(strtolower($fun_name)).'.fun.php 不存在');
+                exit('函数文件：'.$file.' 不存在');
             }else {
                 header('HTTP/1.1 404 Not Found');
                 header("status: 404 Not Found");
@@ -146,11 +155,20 @@ abstract class Libs{
     }
 
     public function load_class($class_name){
-        if(file_exists(DIR_CLASS.ucwords(strtolower($class_name)).'.class.php')){
-            require_once DIR_CLASS.ucwords(strtolower($class_name)).'.class.php';
+        $arr = explode('/', $model);
+        $file = '';
+        $count = count($arr) - 1;
+        for($i = 0; $i < $count; $i++){
+            $file .= $arr[$i].'/';
+        }
+        $filename = ucfirst($arr[$count]);
+        $file .= $filename.'.class.php';
+
+        if(file_exists(DIR_CLASS.$file)){
+            require_once DIR_CLASS.$file;
         }else {
             if(DEBUG){
-                exit('类文件：'.ucwords(strtolower($class_name)).'.class.php 不存在');
+                exit('类文件：'.$file.' 不存在');
             }else {
                 header('HTTP/1.1 404 Not Found');
                 header("status: 404 Not Found");
