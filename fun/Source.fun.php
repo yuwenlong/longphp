@@ -90,3 +90,49 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0){
     return $keyc.str_replace('=', '', base64_encode($result));
   }
 }
+
+/**
+ * 大M方法 加载模块
+ * $model   模块名称 如 aaa/bbb 就是目录 model下的 aaa/Bbb.model.php 模块名称就是Bbb
+ * $db 就是数据库连接对象
+ *
+ * */
+function M($model, $db = NULL){
+    $arr = explode('/', $model);
+    $file = '';
+    $count = count($arr) - 1;
+    for($i = 0; $i < $count; $i++){
+        $file .= $arr[$i].'/';
+    }
+    $filename = ucfirst($arr[$count]);
+    $file .= $filename.'.model.php';
+
+    if(!file_exists(DIR_MODEL.$file)){
+        if(DEBUG){
+            exit('模型文件：'.DIR_MODEL.$file.' 不存在');
+        }else {
+            header('HTTP/1.1 404 Not Found');
+            header("status: 404 Not Found");
+        }
+
+        return false;
+    }
+    require_once DIR_LIB.'Model.lib.php';
+    require_once DIR_MODEL.$file;
+
+    if(!class_exists($filename)){
+        if(DEBUG){
+            exit('模型类：'.$filename.' 不存在');
+        }else {
+            header('HTTP/1.1 404 Not Found');
+            header("status: 404 Not Found");
+        }
+
+        return false;
+    }
+
+    $model = new $filename;
+    $model->init($db);
+
+    return $model;
+}

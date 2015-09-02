@@ -14,6 +14,7 @@ define('DIR_CONF', DIR.'conf/');
 define('DIR_FUN', DIR.'fun/');
 define('DIR_LIB', DIR.'lib/');
 define('DIR_TPL', DIR.'tpl/');
+define('DIR_MODEL', DIR.'model/');
 require_once DIR_LIB.'Libs.lib.php';
 require_once DIR_CLASS.'Request.class.php';
 require_once DIR_FUN.'Source.fun.php';
