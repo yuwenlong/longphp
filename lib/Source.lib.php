@@ -7,7 +7,7 @@ if(DEBUG){
     error_reporting(0);
 }
 
-define('LONGPHP_VERSION', 1.0.0);
+define('LONGPHP_VERSION', '1.0.0');
 define('DIR', strtr(dirname(dirname(__FILE__)), array('\\'=>'/')).'/');
 define('DIR_APP', DIR.'app/');
 define('DIR_CLASS', DIR.'class/');
