@@ -142,7 +142,7 @@ abstract class Libs{
         $filename = ucfirst($arr[$count]);
         $file .= $filename.'.fun.php';
 
-        if(file_exists(DIR_FUN.$file){
+        if(file_exists(DIR_FUN.$file)){
             require_once DIR_FUN.$file;
         }else {
             if(DEBUG){
