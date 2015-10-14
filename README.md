@@ -6,7 +6,7 @@
 
 <yuwenlong@wenlong.pw>
 
-框架应用说明：<a href="http://www.wenlong.pw/category/kuangjia" target="_blank">框架应用说明</a>
+<a href="http://www.wenlong.pw/category/kuangjia" target="_blank">框架应用说明</a>
 
 测试地址：
 > 普通：http://localhost/longphp
