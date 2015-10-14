@@ -1,14 +1,18 @@
 #longphp
 
 A simple php framework
+
 作者微博：[http://weibo.com/206123787](http://weibo.com/206123787 "作者微博"){:target="_blank"}
+
 作者邮箱：<yuwenlong@wenlong.pw>
+
 框架应用说明：[http://www.wenlong.pw/category/kuangjia](http://www.wenlong.pw/category/kuangjia "框架应用说明"){:target="_blank"}
+
 测试地址：
 普通：http://localhost/longphp
 smarty: http://localhost/longphp/?c=smarty
 
-```
+```php
 Apache伪静态
 RewriteCond %{QUERY_STRING} ^(.*)$
 RewriteRule (?!source)(.*)/([\w]+)\.html$ index.php?f=$1&c=$2&%1
