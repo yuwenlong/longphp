@@ -10,6 +10,7 @@ A simple php framework
 
 测试地址：
 >普通：http://localhost/longphp
+
 >smarty: http://localhost/longphp/?c=smarty
 
 ```php
