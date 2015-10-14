@@ -9,9 +9,8 @@ A simple php framework
 框架应用说明：[http://www.wenlong.pw/category/kuangjia](http://www.wenlong.pw/category/kuangjia "框架应用说明"){:target="_blank"}
 
 测试地址：
->普通：http://localhost/longphp
-
->smarty: http://localhost/longphp/?c=smarty
+> 普通：http://localhost/longphp
+> smarty: http://localhost/longphp/?c=smarty
 
 ```php
 Apache伪静态
