@@ -19,8 +19,14 @@ abstract class Libs{
 	
     public function before(){
         $this->config = include DIR_CONF.'config.conf.php';
+        if(ENVIRONMENT != 'production' && file_exists(DIR_CONF.ENVIRONMENT.'/'.'config.conf.php')){
+            $this->config = include DIR_CONF.ENVIRONMENT.'/'.'config.conf.php';
+        }
         if(!empty($this->db)){
             $db_arr = include_once DIR_CONF.'db.conf.php';
+            if(ENVIRONMENT != 'production' && file_exists(DIR_CONF.ENVIRONMENT.'/'.'db.conf.php')){
+                $db_arr = include DIR_CONF.ENVIRONMENT.'/'.'db.conf.php';
+            }
             $this->load_class('mysql');
             $this->db_arr = explode(',', $this->db);
             foreach($this->db_arr as $v){
@@ -86,7 +92,7 @@ abstract class Libs{
                 require DIR_TPL.$file.$tplname.'.tpl.html';
             }
         }else {
-            if(DEBUG){
+            if(ENVIRONMENT == 'development'){
                 exit('模版文件: '.DIR_TPL.$file.$tplname.'.tpl.html 不存在');
             }else {
                 header('HTTP/1.1 404 Not Found');
@@ -121,7 +127,7 @@ abstract class Libs{
                 require DIR_TPL.$file.$tplname.'.tpl.html';
             }
         }else {
-            if(DEBUG){
+            if(ENVIRONMENT == 'development'){
                 exit('模版文件: '.DIR_TPL.$file.$tplname.'.tpl.html 不存在');
             }else {
                 header('HTTP/1.1 404 Not Found');
@@ -145,7 +151,7 @@ abstract class Libs{
         if(file_exists(DIR_FUN.$file)){
             require_once DIR_FUN.$file;
         }else {
-            if(DEBUG){
+            if(ENVIRONMENT == 'development'){
                 exit('函数文件：'.$file.' 不存在');
             }else {
                 header('HTTP/1.1 404 Not Found');
@@ -167,7 +173,7 @@ abstract class Libs{
         if(file_exists(DIR_CLASS.$file)){
             require_once DIR_CLASS.$file;
         }else {
-            if(DEBUG){
+            if(ENVIRONMENT == 'development'){
                 exit('类文件：'.$file.' 不存在');
             }else {
                 header('HTTP/1.1 404 Not Found');

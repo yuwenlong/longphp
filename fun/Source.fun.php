@@ -9,7 +9,7 @@ function autoload($classname){
 	$classname = htmlspecialchars($classname, ENT_QUOTES, 'UTF-8');
 	require_once DIR_APP.$file.$classname.'.app.php';
 	if(!class_exists($action)){
-		if(DEBUG){
+		if(ENVIRONMENT == 'development'){
 			exit('控制器： '.$action.' 不存在');
 		}else{
 			header('HTTP/1.1 404 Not Found'); 

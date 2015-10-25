@@ -10,6 +10,9 @@ class Session {
     function __construct($db){
         $this->db = $db;
         $this->config = include DIR_CONF.'config.conf.php';
+        if(ENVIRONMENT != 'production' && file_exists(DIR_CONF.ENVIRONMENT.'/'.'config.conf.php')){
+            $this->config = include DIR_CONF.ENVIRONMENT.'/'.'config.conf.php';
+        }
     }
 
     function generate_sid($cookie_key = 'sccookie'){

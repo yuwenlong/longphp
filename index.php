@@ -1,6 +1,11 @@
 <?php
 header("Content-type:text/html; charset=utf-8;");
-define('DEBUG', true);
+/**
+ * development
+ * testing
+ * production
+ * */
+define('ENVIRONMENT', isset($_SERVER['LONG_ENV']) ? $_SERVER['LONG_ENV'] : 'production');
 require 'lib/Source.lib.php';
 
 $classname = 'Action_'.$classname;
