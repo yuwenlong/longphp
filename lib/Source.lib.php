@@ -60,7 +60,7 @@ $classname = substr($classname, 0, -1);
 
 
 if(!file_exists(DIR_APP.$file.$classname.'.app.php')){
-	if(DEBUG){
+	if(ENVIRONMENT == 'development'){
 		exit('文件：'.DIR_APP.$file.$classname.'.app.php 不存在');
     }else {
 		header('HTTP/1.1 404 Not Found'); 

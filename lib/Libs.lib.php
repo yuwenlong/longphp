@@ -12,9 +12,6 @@ abstract class Libs{
         $this->before();
         $this->main();
         $this->after();
-		if(!empty($this->is_smarty_fetch)){
-            $this->final();
-        }
     }
 	
     public function before(){
@@ -47,14 +44,11 @@ abstract class Libs{
     }
 	
     public function after(){
-        global $file;
         if(!empty($this->tpl)){
-            if(empty($this->is_smarty_fetch)){
-                $this->tpl_include($this->tpl);
-            }else {
-                $this->tpl_con = $this->tpl_fetch($this->tpl);
-            }
+            header('Content-type: text/html; charset=utf-8');
+            $this->tpl_include($this->tpl);
         }else if(!empty($this->_json_data)){
+            header('Content-type: application/json;');
             echo json_encode($this->_json_data);
         }
 
@@ -100,46 +94,9 @@ abstract class Libs{
             }
         }
     }
-	
-	public function tpl_fetch($tpl){
-        global $file;
-        $t_arr = explode('_', $tpl);
-        
-        $tplname = '';
-        foreach($t_arr as $v){
-            $tplname .= htmlspecialchars(ucwords(strtolower($v)), ENT_QUOTES, 'UTF-8').'_';
-        }
-        $tplname = substr($tplname, 0, -1);
-        $tplname = explode('/', $tplname);
-        $tpl_arr_count = count($tplname);
-        $tplname[$tpl_arr_count - 1] = ucwords(strtolower($tplname[$tpl_arr_count - 1]));
-        $tplname = implode('/', $tplname);
-        if(file_exists(DIR_TPL.$file.$tplname.'.tpl.html')){
-            foreach($this as $k => $v){
-                $$k = $v;
-                if(!empty($this->is_smarty)){
-                    $this->smarty->assign($k, $$k);
-                }
-            }
-            if(!empty($this->is_smarty)){
-                return $this->smarty->fetch($file.$tplname.'.tpl.html');
-            }else {
-                require DIR_TPL.$file.$tplname.'.tpl.html';
-            }
-        }else {
-            if(ENVIRONMENT == 'development'){
-                exit('模版文件: '.DIR_TPL.$file.$tplname.'.tpl.html 不存在');
-            }else {
-                header('HTTP/1.1 404 Not Found');
-                header("status: 404 Not Found");
-                include_once '/404.htm';
-                exit();
-            }
-        }
-    }
 
     public function load_fun($fun_name){
-        $arr = explode('/', $model);
+        $arr = explode('/', $fun_name);
         $file = '';
         $count = count($arr) - 1;
         for($i = 0; $i < $count; $i++){
@@ -161,7 +118,7 @@ abstract class Libs{
     }
 
     public function load_class($class_name){
-        $arr = explode('/', $model);
+        $arr = explode('/', $class_name);
         $file = '';
         $count = count($arr) - 1;
         for($i = 0; $i < $count; $i++){
