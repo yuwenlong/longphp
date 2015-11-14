@@ -13,7 +13,7 @@
 
 > 路由：http://localhost/aaa/bbb/ddd
 
-```php
+```
 //Nginx
 location / {
     try_files $uri $uri/ /index.php;
