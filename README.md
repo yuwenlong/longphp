@@ -2,36 +2,27 @@
 
 ######A simple php framework
 
-<a href="http://weibo.com/206123787" target="_blank">作者微博</a>
+[作者微博](http://weibo.com/206123787 "作者微博")
 
 <yuwenlong@wenlong.pw>
-
-<a href="http://www.wenlong.pw/category/kuangjia" target="_blank">框架应用说明</a>
 
 测试地址：
 > 普通：http://localhost/longphp
 
-> smarty: http://localhost/longphp/?c=smarty
+> smarty: http://localhost/longphp/smarty
 
-```php
-Apache伪静态
-RewriteCond %{QUERY_STRING} ^(.*)$
-RewriteRule (?!source)(.*)/([\w]+)\.html$ index.php?f=$1&c=$2&%1
-RewriteCond %{QUERY_STRING} ^(.*)$
-RewriteRule ([\w]+)\.html$ index.php?c=$1&%1
+> 路由：http://localhost/aaa/bbb/ddd
 
-Nginx伪静态
-rewrite ^/([\w]+).html$ /index.php?c=$1 last;
-rewrite ^/(?!source)(.*)/([\w]+).html$ /index.php?f=$1&c=$2 last;
-
-二级目录 xxxx
-Apache伪静态
-RewriteCond %{QUERY_STRING} ^(.*)$
-RewriteRule xxxx/(?!source)(.*)/([\w]+)\.html$ xxxx/index.php?f=$1&c=$2&%1
-RewriteCond %{QUERY_STRING} ^(.*)$
-RewriteRule xxxx/([\w]+)\.html$ xxxx/index.php?c=$1&%1
-
-Nginx伪静态
-rewrite ^/xxxx/([\w]+).html$ /xxxx/index.php?c=$1 last;
-rewrite ^/xxxx/(?!source)(.*)/([\w]+).html$ /xxxx/index.php?f=$1&c=$2 last;
 ```
+//Nginx
+location / {
+    try_files $uri $uri/ /index.php;
+}
+
+//如果是二级目录
+location /xxxx/ {
+    try_files ^/xxxx/$uri xxxx/$uri/ /xxxx/index.php;
+}
+```
+##### 详细文档地址
+[文档地址](http://yuwenlong.github.io/longphp "文档地址")

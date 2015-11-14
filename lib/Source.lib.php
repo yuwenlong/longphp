@@ -43,34 +43,3 @@ $key = 'jfaawiaw;sadhawkjaw123SAWDasd';
 
 $router = new Router();
 $router->run();
-
-/*$c = empty(Request::get('c')) ? 'index' : Request::get('c');
-$c_arr = explode('_', strtr($c, array('../' => '', './' => '', '/' => '', '\\' => '')));
-
-$f = empty(Request::get('f')) ? 'index/' : Request::get('f');
-$f = explode('.', strtr($f, array('../' => '', './' => '', '/' => '', '\\' => '')));
-$file = '';
-foreach((array)$f as $v){
-	if(!empty($v)){
-		$file .= $v.'/';
-	}
-}
-
-$classname = '';
-foreach($c_arr as $v){
-	$classname .= htmlspecialchars(ucwords(strtolower($v)), ENT_QUOTES, 'UTF-8').'_';
-}
-$classname = substr($classname, 0, -1);
-
-
-if(!file_exists(DIR_APP.$file.$classname.'.app.php')){
-	if(ENVIRONMENT == 'development'){
-		exit('文件：'.DIR_APP.$file.$classname.'.app.php 不存在');
-    }else {
-		header('HTTP/1.1 404 Not Found'); 
-        header("status: 404 Not Found");
-	}
-}else {
-    autoload($classname);
-}*/
-
