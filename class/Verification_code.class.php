@@ -7,7 +7,7 @@
  if(!defined('DIR')){
 	exit('Please correct access URL.');
 }
- 
+
 session_start();
 $randCode = '';
 $chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPRSTUVWXYZ23456789';
@@ -130,7 +130,7 @@ Class GIFEncoder
         'ERR03' =>"Could not make animation from animated GIF source",
     );
 
-    function GIFEncoder ($GIF_src, $GIF_dly = 100, $GIF_lop = 0, $GIF_dis = 0,  $GIF_red = 0, $GIF_grn = 0, $GIF_blu = 0, $GIF_mod = 'bin' )
+    function __construct($GIF_src, $GIF_dly = 100, $GIF_lop = 0, $GIF_dis = 0,  $GIF_red = 0, $GIF_grn = 0, $GIF_blu = 0, $GIF_mod = 'bin' )
     {
         if (!is_array($GIF_src) && !is_array($GIF_tim))
         {

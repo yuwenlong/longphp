@@ -4,11 +4,11 @@ if(!defined('DIR')){
 }
 
 class Action_Smarty extends Libs{
-    function init(){
+    function __construct(){
         $this->is_smarty = true;
 		$this->tpl = 'smarty';
 		$this->title = '22';
 	}
-	function main(){
+	function index(){
 	}
 }

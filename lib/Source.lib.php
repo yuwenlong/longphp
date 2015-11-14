@@ -1,6 +1,6 @@
 <?php
-define('LONGPHP_VERSION', '1.0.0');
-define('DIR', strtr(dirname(dirname(__FILE__)), array('\\'=>'/')).'/');
+define('LONGPHP_VERSION', '1.2.0');
+define('DIR', strtr(dirname(__FILE__, 2), array('\\'=>'/')).'/');
 define('DIR_APP', DIR.'app/');
 define('DIR_CLASS', DIR.'class/');
 define('DIR_CONF', DIR.'conf/');
@@ -10,6 +10,7 @@ define('DIR_TPL', DIR.'tpl/');
 define('DIR_MODEL', DIR.'model/');
 require_once DIR_LIB.'Libs.lib.php';
 require_once DIR_CLASS.'Request.class.php';
+require_once DIR_CLASS.'Router.class.php';
 require_once DIR_FUN.'Source.fun.php';
 
 switch (ENVIRONMENT)
@@ -40,7 +41,10 @@ switch (ENVIRONMENT)
 
 $key = 'jfaawiaw;sadhawkjaw123SAWDasd';
 
-$c = empty(Request::get('c')) ? 'index' : Request::get('c');
+$router = new Router();
+$router->run();
+
+/*$c = empty(Request::get('c')) ? 'index' : Request::get('c');
 $c_arr = explode('_', strtr($c, array('../' => '', './' => '', '/' => '', '\\' => '')));
 
 $f = empty(Request::get('f')) ? 'index/' : Request::get('f');
@@ -68,5 +72,5 @@ if(!file_exists(DIR_APP.$file.$classname.'.app.php')){
 	}
 }else {
     autoload($classname);
-}
+}*/
 

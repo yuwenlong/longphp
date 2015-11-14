@@ -4,13 +4,11 @@ if(!defined('DIR')){
 }
 
 abstract class Libs{
-    abstract protected function init();
-    abstract protected function main();
-	
     public function run(){
-        $this->init();
         $this->before();
-        $this->main();
+        $instance = func_get_arg(0)->newInstanceArgs();
+        $method = func_get_arg(0)->getmethod(func_get_arg(1));
+        $method->invokeArgs($instance, func_get_arg(2));
         $this->after();
     }
 	

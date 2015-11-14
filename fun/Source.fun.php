@@ -3,14 +3,28 @@ if(!defined('DIR')){
 	exit('Please correct access URL.');
 }
 
-function autoload($classname){
-	global $file;
+function autoload($uri){
+    $uri_arr = explode('/', $uri);
+    $classname = ucwords(strtolower(array_pop($uri_arr)));
+
 	$action = 'Action_'.$classname;
-	$classname = htmlspecialchars($classname, ENT_QUOTES, 'UTF-8');
+    $classname = htmlspecialchars($classname, ENT_QUOTES, 'UTF-8');
+    $file = implode('/', $uri_arr).'/';
+    $file_dir = DIR_APP.$file.$classname.'.app.php';
+
+    if(!file_exists($file_dir)){
+        if(ENVIRONMENT == 'development'){
+			exit('file not found');
+		}else{
+			header('HTTP/1.1 404 Not Found'); 
+			header("status: 404 Not Found"); 
+		}
+    }
+
 	require_once DIR_APP.$file.$classname.'.app.php';
 	if(!class_exists($action)){
 		if(ENVIRONMENT == 'development'){
-			exit('控制器： '.$action.' 不存在');
+			exit('控制器：'.$action.' 不存在');
 		}else{
 			header('HTTP/1.1 404 Not Found'); 
 			header("status: 404 Not Found"); 

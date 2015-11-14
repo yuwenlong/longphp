@@ -8,11 +8,11 @@ if(!defined('DIR')){
 }
 
 class Action_Session extends Libs{
-    function init(){
+    function __construct(){
         $this->db = 'db1';
     }
 
-    function main(){
+    function index(){
         global $key;
         $this->load_class('session');
         $session = new Session($this->db1);
