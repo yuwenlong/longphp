@@ -5,6 +5,6 @@ if(!defined('DIR')){
 
 class Action_Index extends Libs{
     function index(){
-        echo 'hello world';
+        echo 111;
     }
 }

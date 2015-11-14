@@ -18,8 +18,8 @@ class Router{
         $uri = $_SERVER['REQUEST_URI'];
         $dir_name = explode('/', strtr(dirname(__FILE__, 2), array('\\' => '/')));
         $pop = array_pop($dir_name);
-        if(preg_match('/^(\/'.$pop.')/', $_SERVER['REQUEST_URI'])){
-            $uri = strtr($_SERVER['REQUEST_URI'], array('/'.$pop => ''));
+        if(preg_match('/^(\/'.$pop.')/', $uri)){
+            $uri = strtr($uri, array('/'.$pop => ''));
         }
 
         $uri_arr = array();
@@ -74,6 +74,7 @@ class Router{
 
         $data = array(
             $class,
+            $instance,
             $this->method,
             $uri_arr
         );

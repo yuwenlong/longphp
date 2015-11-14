@@ -41,5 +41,6 @@ switch (ENVIRONMENT)
 
 $key = 'jfaawiaw;sadhawkjaw123SAWDasd';
 
+$uri = $_SERVER['REQUEST_URI'];
 $router = new Router();
 $router->run();

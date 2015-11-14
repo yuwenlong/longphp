@@ -3,12 +3,16 @@ if(!defined('DIR')){
 	exit('Please correct access URL.');
 }
 
-abstract class Libs{
+class Libs{
     public function run(){
+        global $router;
+        $this->router_dir = $router->dir;
+        $this->router_class = $router->class;
+        $this->router_method = $router->method;
+
         $this->before();
-        $instance = func_get_arg(0)->newInstanceArgs();
-        $method = func_get_arg(0)->getmethod(func_get_arg(1));
-        $method->invokeArgs($instance, func_get_arg(2));
+        $method = func_get_arg(0)->getmethod(func_get_arg(2));
+        $method->invokeArgs(func_get_arg(1), func_get_arg(3));
         $this->after();
     }
 	
