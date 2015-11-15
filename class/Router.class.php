@@ -31,10 +31,10 @@ class Router{
                 $dir = $file_name = '';
                 $is_file = $is_dir = false;
                 foreach($uri_arr as $k => $v){
-                    $file_name = ucwords(strtolower($v)).'.app.php';
+                    $file_name = ucwords(strtolower($v)).'.controller.php';
                     $dir .= $v.'/';
 
-                    if($is_dir == false && is_dir(DIR_APP.$dir)){
+                    if($is_dir == false && is_dir(DIR_CONTROLLER.$dir)){
                         $this->_set_dir($dir);
                         for($i = 0; $i <= $k; $i++){
                             unset($uri_arr[$i]);
@@ -42,7 +42,7 @@ class Router{
                         $is_dir = true;
                     }
                     
-                    if(is_file(DIR_APP.$this->dir.$file_name)){
+                    if(is_file(DIR_CONTROLLER.$this->dir.$file_name)){
                         $this->_set_class($v);
                         unset($uri_arr[$k]);
                         $is_file = true;

@@ -1,7 +1,7 @@
 <?php
 define('LONGPHP_VERSION', '1.2.0');
 define('DIR', strtr(dirname(__FILE__, 2), array('\\'=>'/')).'/');
-define('DIR_APP', DIR.'app/');
+define('DIR_CONTROLLER', DIR.'controller/');
 define('DIR_CLASS', DIR.'class/');
 define('DIR_CONF', DIR.'conf/');
 define('DIR_FUN', DIR.'fun/');
