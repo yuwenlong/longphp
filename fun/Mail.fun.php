@@ -17,6 +17,7 @@ function send_mail($tomail, $subject, $body, $cc = null){
     $mail->Encoding = "base64";
     $tomail = explode(',', $tomail);
     foreach((array)$tomail as $v){
+        $v = trim($v);
         $mail->AddAddress($v);
     }
     $mail->AddReplyTo("php@php.net","php.net");
@@ -28,6 +29,7 @@ function send_mail($tomail, $subject, $body, $cc = null){
     if(!empty($cc)){
         $cc = explode(',', $cc);
         foreach((array)$cc as $v){
+            $v = trim($v);
             $mail->AddCC($v);
         }
     }

@@ -73,7 +73,7 @@ class bihua
        $output.=$this->foot;
        return $output;
    }
-   function bihua()
+   function __construct()
    {
        $this->tone=true;
        $this->head="<table border=0><tr align=center>";
