@@ -4,7 +4,7 @@
 
 [作者微博](http://weibo.com/206123787 "作者微博")
 
-<yuwenlong@wenlong.pw>
+<yuwenlong@wenlong.org>
 
 测试地址：
 > 普通：http://localhost/longphp
