@@ -25,4 +25,4 @@ location /xxxx/ {
 }
 ```
 ##### 详细文档地址
-[文档地址](http://www.wenlong.pw/longphp "文档地址")
+[文档地址](http://yuwenlong.github.io/longphp "文档地址")
