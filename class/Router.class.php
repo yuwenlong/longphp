@@ -1,7 +1,7 @@
 <?php
 /**
  * @require : none
- * @author : yuwenlong@wenlong.pw
+ * @author : yuwenlong@wenlong.org
  * @date : 2015-11-14 14:11:10
  * @description : 路由类 
  */
