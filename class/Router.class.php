@@ -15,7 +15,15 @@ class Router{
     }
 
     private function load(){
-        $uri = $_SERVER['REQUEST_URI'];
+        $uri_arr = explode('?', $_SERVER['REQUEST_URI']);
+
+        $get_params = explode('&', $uri_arr[1]);
+        foreach($get_params as $get_v){
+            $get_vs = explode('=', $get_v);
+            $_GET[$get_vs[0]] = $get_vs[1];
+        }
+
+        $uri = $uri_arr[0];
         $dir_name = explode('/', strtr(dirname(__FILE__, 2), array('\\' => '/')));
         $pop = array_pop($dir_name);
         if(preg_match('/^(\/'.$pop.')/', $uri)){
