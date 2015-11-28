@@ -20,8 +20,8 @@ location / {
 }
 
 //如果是二级目录
-location /xxxx/ {
-    try_files ^/xxxx/$uri xxxx/$uri/ /xxxx/index.php;
+location ^/xxxx/ {
+    try_files xxxx/$uri xxxx/$uri/ /xxxx/index.php;
 }
 ```
 ##### 详细文档地址
