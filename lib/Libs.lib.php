@@ -18,13 +18,21 @@ class Libs{
 	
     public function before(){
         $this->config = include DIR_CONF.'config.conf.php';
+
         if(ENVIRONMENT != 'production' && file_exists(DIR_CONF.ENVIRONMENT.'/'.'config.conf.php')){
-            $this->config = include DIR_CONF.ENVIRONMENT.'/'.'config.conf.php';
+            $this->config = include_once DIR_CONF.ENVIRONMENT.'/'.'config.conf.php';
         }
+
+        if(!empty($this->config['php.ini'])){
+            foreach($this->config['php.ini'] as $pk => $pv){
+                ini_set($pk, $pv);
+            }
+        }
+
         if(!empty($this->db)){
             $db_arr = include_once DIR_CONF.'db.conf.php';
             if(ENVIRONMENT != 'production' && file_exists(DIR_CONF.ENVIRONMENT.'/'.'db.conf.php')){
-                $db_arr = include DIR_CONF.ENVIRONMENT.'/'.'db.conf.php';
+                $db_arr = include_once DIR_CONF.ENVIRONMENT.'/'.'db.conf.php';
             }
             $this->load_class('mysql');
             $this->db_arr = explode(',', $this->db);
