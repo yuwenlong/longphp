@@ -17,10 +17,12 @@ class Router{
     private function load(){
         $uri_arr = explode('?', $_SERVER['REQUEST_URI']);
 
-        $get_params = explode('&', $uri_arr[1]);
-        foreach($get_params as $get_v){
-            $get_vs = explode('=', $get_v);
-            $_GET[$get_vs[0]] = $get_vs[1];
+        if(count($uri_arr) == 2){
+            $get_params = explode('&', $uri_arr[1]);
+            foreach($get_params as $get_v){
+                $get_vs = explode('=', $get_v);
+                $_GET[$get_vs[0]] = $get_vs[1];
+            }
         }
 
         $uri = $uri_arr[0];
