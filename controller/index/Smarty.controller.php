@@ -6,7 +6,7 @@ if(!defined('DIR')){
 class Action_Smarty extends Libs{
     function __construct(){
         $this->is_smarty = true;
-		$this->tpl = 'smarty';
+		$this->tpl = 'index/smarty';
 		$this->title = '22';
 	}
 	function index(){
