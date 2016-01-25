@@ -46,14 +46,13 @@ class Libs{
                 }
             }
         }
-
+    }
+	
+    public function after(){
         if(!empty($this->is_smarty)){
             require_once DIR_CONF.'smarty.conf.php';
             $this->smarty = $smarty;
         }
-    }
-	
-    public function after(){
         if(!empty($this->tpl)){
             header('Content-type: text/html; charset=utf-8');
             $this->tpl_include($this->tpl);
