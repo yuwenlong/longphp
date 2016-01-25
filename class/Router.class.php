@@ -68,13 +68,10 @@ class Router{
         $action = 'Action_'.$classname;
         $class = new ReflectionClass($action);
 
-        if($is_file == true && !empty($uri_arr)){
+        if(!empty($uri_arr) && method_exists($action, $uri_arr[0])){
             $this->_set_method(array_shift($uri_arr));
         }
 
-        if($is_file == true && !method_exists($action, $this->method)){
-            exit('function '.$this->method.' not found');
-        }
         $instance = $class->newInstanceArgs();
         $method = $class->getmethod('run');
 
