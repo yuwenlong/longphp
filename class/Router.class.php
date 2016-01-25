@@ -60,10 +60,6 @@ class Router{
                     }
                 }
             }while(0);
-
-            if($is_file == false){
-                exit('file not found');
-            }
         }
 
         autoload($this->dir.$this->class);
@@ -72,11 +68,11 @@ class Router{
         $action = 'Action_'.$classname;
         $class = new ReflectionClass($action);
 
-        if(!empty($uri_arr)){
+        if($is_file == true && !empty($uri_arr)){
             $this->_set_method(array_shift($uri_arr));
         }
 
-        if(!method_exists($action, $this->method)){
+        if($is_file == true && !method_exists($action, $this->method)){
             exit('function '.$this->method.' not found');
         }
         $instance = $class->newInstanceArgs();
