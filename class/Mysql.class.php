@@ -12,8 +12,12 @@ class Mysql {
 		mysqli_query($this->conn, "SET NAMES UTF8");
 	}
 	
-	function query($sql){
-		return mysqli_query($this->conn, $sql);
+    function query($sql, $user_result = false){
+        if($user_result){
+            return mysqli_query($this->conn, $sql, MYSQLI_USE_RESULT);
+        }else {
+		    return mysqli_query($this->conn, $sql, MYSQLI_STORE_RESULT);
+        }
 	}
 	
     function fetchAll($sql){
