@@ -53,6 +53,7 @@ class Libs{
             require_once DIR_CONF.'smarty.conf.php';
             $this->smarty = $smarty;
         }
+
         if(!empty($this->tpl)){
             header('Content-type: text/html; charset=utf-8');
             $this->tpl_include($this->tpl);
