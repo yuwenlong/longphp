@@ -33,13 +33,13 @@ class Router{
         }
 
         $uri_arr = array();
+        $dir = $file_name = '';
+        $is_file = $is_dir = false;
         if($uri != '/'){
             $uri_arr = explode('/', $uri);
             array_shift($uri_arr);
 
             do{
-                $dir = $file_name = '';
-                $is_file = $is_dir = false;
                 foreach($uri_arr as $k => $v){
                     $file_name = ucwords(strtolower($v)).'.controller.php';
                     $dir .= $v.'/';
