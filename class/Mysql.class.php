@@ -6,10 +6,10 @@ if(!defined('DIR')){
 class Mysql {
 	public $conn;
 	public $prefix;
-    function __construct($host, $port, $name, $pass, $database, $prefix){
+    function __construct($host, $port, $name, $pass, $database, $prefix, $charset){
 		$this->conn = mysqli_connect($host, $name, $pass, $database, $port) or die(mysqli_connect_error());
         $this->prefix = $prefix;
-		mysqli_query($this->conn, "SET NAMES UTF8");
+		mysqli_query($this->conn, 'SET NAMES '.$charset);
 	}
 	
     function query($sql, $user_result = false){

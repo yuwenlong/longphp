@@ -41,7 +41,7 @@ class Libs{
                     $v = trim($v);
                     $db = $db_arr[$v];
                     $prefix = $v.'_prefix';
-                    $this->$v = new Mysql($db['host'], $db['port'], $db['name'], $db['pass'], $db['database'], $db['prefix']);
+                    $this->$v = new Mysql($db['host'], $db['port'], $db['name'], $db['pass'], $db['database'], $db['prefix'], $db['charset']);
                     $this->$prefix = $db['prefix'];
                 }
             }
