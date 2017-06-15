@@ -6,9 +6,9 @@
  * @description : 路由类 
  */
 class Router{
-    public $class = 'index';
+    public $class = '';
     public $method = 'index';
-    public $dir = 'index/';
+    public $dir = '';
 
     function run(){
         $this->load();
@@ -50,20 +50,32 @@ class Router{
                             unset($uri_arr[$i]);
                         }
                         $is_dir = true;
+                        continue;
                     }
-                    
-                    if(is_file(DIR_CONTROLLER.$this->dir.$file_name)){
-                        $this->_set_class($v);
-                        unset($uri_arr[$k]);
-                        $is_file = true;
-                        break;
+
+                    if(!is_file(DIR_CONTROLLER.$this->dir.$file_name) && ENVIRONMENT == 'development'){
+                        exit('文件：'.DIR_CONTROLLER.$this->dir.$file_name.' 找不到');
                     }
+
+                    $this->_set_class($v);
+                    unset($uri_arr[$k]);
+                    $is_file = true;
+                    break;
                 }
             }while(0);
+        }else {
+            $is_dir = $is_file = true;
+            $file_name = 'Index.controller.php';
+            $this->_set_class('index');
+            $uri_arr[0] = $this->method;
         }
 
-        if($uri != '/' && !empty($uri) && ENVIRONMENT == 'development'){
+        if($uri != '/' && $is_dir == false && $is_file == false && ENVIRONMENT == 'development'){
             exit('uri：'.$uri.' 找不到对应的控制器');
+        }
+
+        if(!empty($uri_arr)){
+            $uri_arr = array_values($uri_arr);
         }
 
         autoload($this->dir.$this->class);
@@ -74,6 +86,8 @@ class Router{
 
         if(!empty($uri_arr) && method_exists($action, $uri_arr[0])){
             $this->_set_method(array_shift($uri_arr));
+        }else if(ENVIRONMENT == 'development'){
+            exit('文件：'.$this->dir.$file_name.' 控制器：'.$action.' 方法：'.$uri_arr[0].' 不存在');
         }
 
         $instance = $class->newInstanceArgs();
