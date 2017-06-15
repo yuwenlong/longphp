@@ -62,6 +62,10 @@ class Router{
             }while(0);
         }
 
+        if($uri != '/' && !empty($uri) && ENVIRONMENT == 'development'){
+            exit('uri：'.$uri.' 找不到对应的控制器');
+        }
+
         autoload($this->dir.$this->class);
         $classname = ucwords(strtolower($this->class));
 
