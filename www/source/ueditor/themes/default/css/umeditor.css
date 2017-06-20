@@ -37,6 +37,16 @@
 .edui-editor-body.focus{border:1px solid #5c9dff}
 .edui-editor-body table{margin:10px 0 10px;border-collapse:collapse;display:table;}
 .edui-editor-body td{padding: 5px 10px;border: 1px solid #DDD;}
+.edui-editor-body iframe.mathquill-embedded-latex{
+    border: 0px;
+    padding: 0px;
+    display: inline;
+    margin: 0px;
+    background: none;
+    vertical-align: middle;
+    width: 0px;
+    height: 0px;
+}
 /*普通按钮*/
 .edui-btn-toolbar .edui-btn{
     position: relative;
@@ -61,14 +71,14 @@
 }
 
 /*状态反射*/
-.edui-btn-toolbar .edui-btn.hover,
-.edui-btn-toolbar .edui-btn.active{
+.edui-btn-toolbar .edui-btn.edui-hover,
+.edui-btn-toolbar .edui-btn.edui-active{
     background-color: #d5e1f2;
     padding: 0;
     border: 1px solid #a3bde3;
     _z-index: 1;
 }
-.edui-btn-toolbar .edui-btn.disabled{
+.edui-btn-toolbar .edui-btn.edui-disabled{
     opacity: 0.3;
     filter: alpha(opacity = 30);
 }
@@ -163,7 +173,7 @@
 .edui-btn-toolbar .edui-btn .edui-icon-emotion {
     background-position: -60px -20px;
 }
-.edui-btn-toolbar .edui-btn .edui-icon-insertvideo {
+.edui-btn-toolbar .edui-btn .edui-icon-video {
     background-position: -320px -20px;
 }
 
@@ -195,7 +205,12 @@
 .edui-btn-toolbar .edui-btn .edui-icon-removeformat {
     background-position: -580px 0;
 }
-
+.edui-btn-toolbar .edui-btn .edui-icon-drafts {
+    background-position: -560px 0;
+}
+.edui-btn-toolbar .edui-btn .edui-icon-formula {
+    background-position: -80px -20px;
+}
 .edui-btn-toolbar .edui-splitbutton{
     position: relative;
     display: inline-block ;
@@ -225,13 +240,17 @@
 }
 
 /*状态反射*/
-.edui-btn-toolbar .edui-splitbutton.hover .edui-btn{
+.edui-btn-toolbar .edui-splitbutton.edui-hover .edui-btn{
     background-color: #d5e1f2;
 }
 
-.edui-btn-toolbar .edui-splitbutton.disabled{
+.edui-btn-toolbar .edui-splitbutton.edui-disabled{
     opacity: 0.3;
     filter: alpha(opacity = 30);
+}
+.edui-btn-toolbar .edui-splitbutton.edui-disabled .edui-caret{
+    opacity: 0.3 \0;
+    filter: alpha(opacity = 30)\0;
 }
 
 
@@ -279,11 +298,15 @@
     background: url(../images/icons.png) -741px 0;
     _background: url(../images/icons.gif) -741px 0;
 }
-.edui-btn-toolbar .edui-combobox.disabled{
+.edui-btn-toolbar .edui-combobox.edui-disabled{
     opacity: 0.2;
     filter: alpha(opacity = 20);
 }
-
+.edui-btn-toolbar .edui-combobox.edui-disabled .edui-button-label,
+.edui-btn-toolbar .edui-combobox.edui-disabled .edui-caret{
+    opacity: 0.2 \0;
+    filter: alpha(opacity = 20)\0;
+}
 .edui-combobox-menu{
     position: absolute;
     top: 100%;
@@ -494,7 +517,7 @@
     background: url("../images/close.png") no-repeat center center;
     cursor: pointer;
 }
-.edui-modal-header .edui-close.hover {
+.edui-modal-header .edui-close.edui-hover {
     background-color: #d5e1f2;
     padding:0;
     border: 1px solid #a3bde3;
@@ -528,7 +551,7 @@
     text-align: center;
     cursor: pointer;
 }
-.edui-modal-footer .edui-btn.hover{
+.edui-modal-footer .edui-btn.edui-hover{
     background-color: #d5e1f2;
     border: 1px solid #a3bde3;
 }
@@ -558,7 +581,7 @@
     height: 400px;
 }
 /*插入视频*/
-.edui-dialog-insertvideo-body{
+.edui-dialog-video-body{
     width: 600px;
     height: 350px;
 }
@@ -610,6 +633,8 @@
 .edui-tab-nav .edui-tab-item {
     float:left;
     margin-bottom: -1px;
+    margin-top: 1px;
+    margin-top: 0\9;
 }
 .edui-tab-nav .edui-tab-item .edui-tab-text{
     display: block;
@@ -619,11 +644,12 @@
     text-decoration: none;
     outline: 0;
     _border:1px solid #fff ;
+    cursor: pointer;
 }
 .edui-tab-nav .edui-tab-item .edui-tab-text:FOCUS {
     outline: none;
 }
-.edui-tab-nav .edui-tab-item.active  .edui-tab-text{
+.edui-tab-nav .edui-tab-item.edui-active  .edui-tab-text{
     border: 1px solid #ddd;
     border-bottom-color: transparent;
     background-color: #fff;
@@ -636,8 +662,9 @@
     position: relative;
     display: none;
     background-color: #fff;
+    clear: both;
 }
-.edui-tab-content .edui-tab-pane.active{
+.edui-tab-content .edui-tab-pane.edui-active{
     display: block;
 }
 
@@ -653,11 +680,12 @@
 .edui-tooltip .edui-tooltip-arrow{
     position: absolute;
     top: 0;
-    _top: -19px;
+    _top: -2px;
     left: 50%;
     width: 0;
     height: 0;
     padding: 0;
+    font-size:0;
     margin-left: -5px;
     border-color: transparent;
     border-style: dashed dashed solid dashed;
@@ -673,6 +701,7 @@
     font-size: 10px;
     background-color: #000000;
     white-space: nowrap;
+    line-height: 12px;
 }
 .edui-splitbutton-color-label {
     width: 16px;
