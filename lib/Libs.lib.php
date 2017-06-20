@@ -34,7 +34,7 @@ class Libs{
             if(ENVIRONMENT != 'production' && file_exists(DIR_CONF.ENVIRONMENT.'/'.'db.conf.php')){
                 $db_arr = include_once DIR_CONF.ENVIRONMENT.'/'.'db.conf.php';
             }
-            $this->load_class('mysql');
+            $this->load_class('mysql', false);
             $this->db_arr = explode(',', $this->db);
             foreach($this->db_arr as $v){
                 if(!empty($v)){
