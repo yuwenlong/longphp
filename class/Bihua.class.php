@@ -28,9 +28,8 @@ class bihua
        {
            for ($j=0;$j<5;$j++)
            {
-               $index=strstr($this->data[$i][$j], $str);
-               if (!($index===false)&&($index%2==0))
-                   return ($i+1);//($i+1).($isFirst?$this->dataIndex[$j]:"")
+               if (@strstr($this->data[$i][$j], $str))
+                   return ($i+1);
            }
        }
        return "&nbsp;";
