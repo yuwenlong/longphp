@@ -127,7 +127,7 @@ class Libs{
         }
     }
 
-    public function load_class($class_name){
+    public function load_class($class_name, $is_new = true){
         $arr = explode('/', $class_name);
         $file = '';
         $count = count($arr) - 1;
@@ -139,6 +139,9 @@ class Libs{
 
         if(file_exists(DIR_CLASS.$file)){
             require_once DIR_CLASS.$file;
+            if($is_new == true){
+                $this->$class_name = new $filename;
+            }
         }else {
             if(ENVIRONMENT == 'development'){
                 exit('类文件：'.$file.' 不存在');
