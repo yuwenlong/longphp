@@ -49,7 +49,7 @@ class Libs{
     }
 	
     public function after(){
-        if(!empty($this->is_smarty)){
+        if((isset($this->is_smarty) && $this->is_smarty !== false) || !isset($this->is_smarty)){
             require_once DIR_CONF.'smarty.conf.php';
             $this->smarty = $smarty;
         }
@@ -86,11 +86,11 @@ class Libs{
         if(file_exists(DIR_TPL.$file.$tplname.'.tpl.html')){
             foreach($this as $k => $v){
                 $$k = $v;
-                if(!empty($this->is_smarty)){
+                if(!empty($this->smarty)){
                     $this->smarty->assign($k, $$k);
                 }
             }
-            if(!empty($this->is_smarty)){
+            if(!empty($this->smarty)){
                 $this->smarty->display($file.$tplname.'.tpl.html');
             }else {
                 require DIR_TPL.$file.$tplname.'.tpl.html';
