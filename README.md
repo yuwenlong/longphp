@@ -2,9 +2,9 @@
 
 ######A simple php framework
 
-[作者微博](http://weibo.com/206123787 "作者微博")
+[作者微博](https://weibo.com/206123787 "作者微博")
 
-<yuwenlong@wenlong.org>
+<yu@wenlong.org>
 
 测试地址：
 > 普通：http://localhost/longphp
@@ -25,4 +25,4 @@ location ^/xxxx/ {
 }
 ```
 ##### 详细文档地址
-[文档地址](http://www.longphp.com "文档地址")
+[文档地址](https://www.longphp.com "文档地址")
