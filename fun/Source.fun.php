@@ -4,12 +4,15 @@ if(!defined('DIR')){
 }
 
 function autoload($uri){
+    $file = '';
     $uri_arr = explode('/', $uri);
     $classname = ucwords(strtolower(array_pop($uri_arr)));
 
 	$action = 'Action_'.$classname;
     $classname = htmlspecialchars($classname, ENT_QUOTES, 'UTF-8');
-    $file = implode('/', $uri_arr).'/';
+    if($uri_arr){
+        $file = implode('/', $uri_arr).'/';
+    }
     $file_dir = DIR_CONTROLLER.$file.$classname.'.controller.php';
 
     if(!file_exists($file_dir)){
@@ -21,7 +24,7 @@ function autoload($uri){
 		}
     }
 
-	require_once DIR_CONTROLLER.$file.$classname.'.controller.php';
+	require_once $file_dir;
 	if(!class_exists($action)){
 		if(ENVIRONMENT == 'development'){
 			exit('控制器：'.$action.' 不存在');

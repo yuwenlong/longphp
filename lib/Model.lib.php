@@ -1,7 +1,7 @@
 <?php
 /**
  * @require : none
- * @author : yuwenlong@wenlong.org
+ * @author : yu@wenlong.org
  * @date : 2015-09-02 15:53:51
  * @description : 模块基类
  */

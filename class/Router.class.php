@@ -1,14 +1,14 @@
 <?php
 /**
  * @require : none
- * @author : yuwenlong@wenlong.org
+ * @author : yu@wenlong.org
  * @date : 2015-11-14 14:11:10
  * @description : 路由类 
  */
 class Router{
     public $class = '';
     public $method = 'index';
-    public $dir = '';
+    public $dir = 'index/';
 
     function run(){
         $this->load();
@@ -26,7 +26,8 @@ class Router{
         }
 
         $uri = $uri_arr[0];
-        $dir_name = explode('/', strtr(dirname(__FILE__, 2), array('\\' => '/')));
+        $dir_arr = strtr(dirname(dirname(__FILE__)), array('\\' => '/'));
+        $dir_name = explode('/', $dir_arr);
         $pop = array_pop($dir_name);
         if(preg_match('/^(\/'.$pop.')/', $uri)){
             $uri = strtr($uri, array('/'.$pop => ''));
@@ -54,7 +55,7 @@ class Router{
                     }
 
                     if(!is_file(DIR_CONTROLLER.$this->dir.$file_name) && ENVIRONMENT == 'development'){
-                        exit('文件：'.DIR_CONTROLLER.$this->dir.$file_name.' 找不到');
+                        exit('文件：'.DIR_CONTROLLER.$this->dir.$file_name.' 找不到；<br>或者<br>目录：'.DIR_CONTROLLER.$dir.' 不存在');
                     }
 
                     $this->_set_class($v);

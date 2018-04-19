@@ -1,6 +1,6 @@
 <?php
 define('LONGPHP_VERSION', '1.2.2');
-define('DIR', strtr(dirname(__FILE__, 2), array('\\'=>'/')).'/');
+define('DIR', strtr(dirname(dirname(__FILE__)), array('\\'=>'/')).'/');
 define('DIR_CONTROLLER', DIR.'controller/');
 define('DIR_CLASS', DIR.'class/');
 define('DIR_CONF', DIR.'conf/');
