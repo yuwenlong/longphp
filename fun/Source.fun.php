@@ -129,7 +129,7 @@ function M($model, $db = NULL){
     $file .= $filename.'.model.php';
 
     if(!file_exists(DIR_MODEL.$file)){
-        if(DEBUG){
+        if(ENVIRONMENT == 'development'){
             exit('模型文件：'.DIR_MODEL.$file.' 不存在');
         }else {
             header('HTTP/1.1 404 Not Found');
@@ -142,7 +142,7 @@ function M($model, $db = NULL){
     require_once DIR_MODEL.$file;
 
     if(!class_exists($filename)){
-        if(DEBUG){
+        if(ENVIRONMENT == 'development'){
             exit('模型类：'.$filename.' 不存在');
         }else {
             header('HTTP/1.1 404 Not Found');
@@ -156,4 +156,16 @@ function M($model, $db = NULL){
     $model->init($db);
 
     return $model;
+}
+
+function arr2tree($arr, $pid = 0, $key = 'pid'){
+    $return_data = [];
+    foreach($arr as $k => $v){
+        if($v[$key] == $pid){
+            $_tmp_return_data = $v;
+            $_tmp_return_data['children'] = arr2tree($arr, $v['id'], $key);
+            $return_data[] = $_tmp_return_data;
+        }
+    }
+    return $return_data;
 }
