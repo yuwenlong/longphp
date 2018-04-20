@@ -77,6 +77,8 @@ class Router{
 
         if(!empty($uri_arr)){
             $uri_arr = array_values($uri_arr);
+        }else {
+            $uri_arr[0] = $this->method;
         }
 
         autoload($this->dir.$this->class);
