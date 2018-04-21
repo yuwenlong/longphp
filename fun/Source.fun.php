@@ -113,9 +113,9 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0){
 }
 
 /**
- * 大M方法 加载模块
+ * 大M方法 加载模型
  * $model   模块名称 如 aaa/bbb 就是目录 model下的 aaa/Bbb.model.php 模块名称就是Bbb
- * $db 就是数据库连接对象
+ * $db 就是数据库配置文件的key
  *
  * */
 function M($model, $db = NULL){
@@ -152,8 +152,15 @@ function M($model, $db = NULL){
         return false;
     }
 
+    $db_arr = include_once DIR_CONF.'db.conf.php';
+    if(ENVIRONMENT != 'production' && file_exists(DIR_CONF.ENVIRONMENT.'/'.'db.conf.php')){
+        $db_arr = include_once DIR_CONF.ENVIRONMENT.'/'.'db.conf.php';
+    }
+    require_once DIR_CLASS.'Mysql.class.php';
+    $db_object = new Mysql($db_arr[$db]['host'], $db_arr[$db]['port'], $db_arr[$db]['name'], $db_arr[$db]['pass'], $db_arr[$db]['database'], $db_arr[$db]['prefix'], $db_arr[$db]['charset']);
+
     $model = new $filename;
-    $model->init($db);
+    $model->init($db_object);
 
     return $model;
 }

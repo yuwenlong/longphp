@@ -28,25 +28,7 @@ class Libs{
             foreach($this->config['php.ini'] as $pk => $pv){
                 ini_set($pk, $pv);
             }
-        }
-
-        if(!empty($this->db)){
-            $db_arr = include_once DIR_CONF.'db.conf.php';
-            if(ENVIRONMENT != 'production' && file_exists(DIR_CONF.ENVIRONMENT.'/'.'db.conf.php')){
-                $db_arr = include_once DIR_CONF.ENVIRONMENT.'/'.'db.conf.php';
-            }
-            $this->load_class('mysql', false);
-            $this->db_arr = explode(',', $this->db);
-            foreach($this->db_arr as $v){
-                if(!empty($v)){
-                    $v = trim($v);
-                    $db = $db_arr[$v];
-                    $prefix = $v.'_prefix';
-                    $this->$v = new Mysql($db['host'], $db['port'], $db['name'], $db['pass'], $db['database'], $db['prefix'], $db['charset']);
-                    $this->$prefix = $db['prefix'];
-                }
-            }
-        }
+        }    
     }
 	
     public function after(){

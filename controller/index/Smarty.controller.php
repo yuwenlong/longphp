@@ -6,14 +6,13 @@ if(!defined('DIR')){
 class Action_Smarty extends Libs{
     function __construct(){
         $this->is_smarty = true;
-        $this->db = 'db1';
+        $this->user_model = M('user/user', 'db1');
 	}
     function index(){
         $this->title = '22';
         $_SESSION['name'] = 'hehe';
 
-        $model = M('user/user', $this->db1);
-        $res = $model->get_list();
+        $res = $this->user_model->get_list();
         print_r($res);
 
 		$this->tpl = 'index/smarty';
