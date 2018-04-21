@@ -5,20 +5,20 @@ if(!defined('DIR')){
 
 return array(
     'db1' => array(
-        'host' => '127.0.0.1',
+        'host' => '10.0.0.4',
         'port' => '3306',
         'name' => 'root',
-        'pass' => '1111',
+        'pass' => 'root',
         'database' => 'test',
         'prefix' => '',
 		'charset' => 'utf8mb4'
     ),
     'db2' => array(
-        'host' => '127.0.0.1',
+        'host' => '10.0.0.4',
         'port' => '3306',
         'name' => 'root',
-        'pass' => '1111',
-        'database' => 'mysql',
+        'pass' => 'root',
+        'database' => 'test',
         'prefix' => '',
 		'charset' => 'utf8mb4'
     ),

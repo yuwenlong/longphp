@@ -13,8 +13,6 @@ require_once DIR_CLASS.'Request.class.php';
 require_once DIR_CLASS.'Router.class.php';
 require_once DIR_FUN.'Source.fun.php';
 
-session_start();
-
 switch (ENVIRONMENT)
 {
 	case 'development':

@@ -11,6 +11,7 @@ class Libs{
         $this->router_method = $router->method;
 
         $this->before();
+        session_start();
         $method = func_get_arg(0)->getmethod(func_get_arg(2));
         $method->invokeArgs(func_get_arg(1), func_get_arg(3));
         $this->after();
