@@ -140,9 +140,7 @@ if(!defined('DIR')){
 require_once DIR_CLASS.'smarty/Smarty.class.php';
 $smarty = new Smarty();
 $smarty-&gt;template_dir = DIR_TPL;
-$smarty-&gt;compile_dir = DIR.'tpl_c/';
-$smarty-&gt;left_delimiter = '&lt;!--{';
-$smarty-&gt;right_delimiter = '}--&gt;';</pre>
+$smarty-&gt;compile_dir = DIR.'tpl_c/';</pre>
                     
                     <h2 id="Controller">控制器说明</h2>
                     <p>控制器目录 <span class="red">controller/</span> 下，支持多目录，控制器代码如下</p>
@@ -154,25 +152,13 @@ if(!defined('DIR')){
 
 class Action_Aaa extends Libs{
     function __construct(){
-        //  配置数据库信息
-        $this-&gt;db = 'db1, db2';     //  引入数据库 必须放在初始化函数里
+        $this->Reg_model = M('user/reg', 'db1');
         $this-&gt;is_smarty = true;    //  是否使用Smarty模板， ture or false, 默认使用，可以不要这行； 不使用的话可以用php原生，必须赋值false； 可以不放在初始化函数里
         $this-&gt;tpl = 'test/aaa';    //  对应模板文件 tpl/test/aaa.tpl.html 可以不放在初始化函数里
         $this-&gt;title = '测试';      //  选写 在模板里使用变量方法 &lt;!--{$title}--&gt; 可以不放在初始化函数里
     }
     function index(){
-        $reg = M('user/reg', $this-&gt;db1);   //  模型使用方法 对应模型文件 model/user/Reg.model.php <span class="red">传进数据库操作对象 用于操作数据库</span>
-        $reg-&gt;get();
-        
-        $reg1 = M('user/reg', $this-&gt;db2);
-        $reg1-&gt;get();
-        
-        // 数据库操作相关
-        $this-&gt;db1-&gt;fetchFirst($sql);   //  返回一条数据
-        $this-&gt;db1-&gt;fetchAll($sql);     //  返回全部数据
-        $this-&gt;db1-&gt;insert($tableName, $data);  //  insert数据 <span class="red">data是数组 array('字段名' =&gt; '值')</span>;
-        $this-&gt;db1-&gt;replace_into($tableName, $data);    //  REPLACE INTO 参数同上
-        $this-&gt;db1-&gt;insert_id();    //  返回insert的ID
+        $this-&gt;Reg_model-&gt;get();
         
         // 加载类和方法
         $this-&gt;load_class('xxx/xxx');   //  加载类文件 支持多目录
