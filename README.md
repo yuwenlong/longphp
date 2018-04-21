@@ -1,6 +1,6 @@
-#longphp
+# longphp
 
-######A simple php framework
+### A simple php framework
 
 [作者微博](https://weibo.com/206123787 "作者微博")
 
@@ -14,14 +14,14 @@
 > 路由：http://localhost/aaa/bbb/ddd
 
 ```
-//Nginx
+// Nginx
 location / {
-    try_files $uri $uri/ /index.php;
+    try_files $uri $uri/ /index.php?$uri&$args;
 }
 
-//如果是二级目录
+// 如果是二级目录
 location ^/xxxx/ {
-    try_files xxxx/$uri xxxx/$uri/ /xxxx/index.php;
+    try_files xxxx/$uri xxxx/$uri/ /xxxx/index.php?$uri&$args;
 }
 ```
 ##### 详细文档地址
