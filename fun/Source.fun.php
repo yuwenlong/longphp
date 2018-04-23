@@ -158,12 +158,12 @@ function M($model, $db = NULL){
         $db_arr = include_once DIR_CONF.ENVIRONMENT.'/'.'db.conf.php';
     }
     require_once DIR_CLASS.'Mysql.class.php';
-    if(empty($global_mysql_object)){
-        $global_mysql_object = new Mysql($db_arr[$db]['host'], $db_arr[$db]['port'], $db_arr[$db]['name'], $db_arr[$db]['pass'], $db_arr[$db]['database'], $db_arr[$db]['prefix'], $db_arr[$db]['charset']);
+    if(empty($global_mysql_object[$db])){
+        $global_mysql_object[$db] = new Mysql($db_arr[$db]['host'], $db_arr[$db]['port'], $db_arr[$db]['name'], $db_arr[$db]['pass'], $db_arr[$db]['database'], $db_arr[$db]['prefix'], $db_arr[$db]['charset']);
     }
 
     $model = new $filename;
-    $model->init($global_mysql_object);
+    $model->init($global_mysql_object[$db]);
 
     return $model;
 }
