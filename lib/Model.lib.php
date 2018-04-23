@@ -64,7 +64,7 @@ abstract class Model{
         return $this;
     }
 
-    protected function limit($m, $n){
+    protected function limit($m, $n = null){
         if(empty($m)){
             return false;
         }
@@ -122,10 +122,10 @@ abstract class Model{
         }
 
         if(!empty($this->limit)){
-            $this->limit = ' '.$this->limit;
+            $this->limit = ' LIMIT '.$this->limit;
         }
 
-        $sql = 'SELECT '.$this->select_fields.' FROM `'.$table_name.'`'.$this->where_str.$this->group_by.$this->order_by.$this->limit;
+        echo $sql = 'SELECT '.$this->select_fields.' FROM `'.$table_name.'`'.$this->where_str.$this->group_by.$this->order_by.$this->limit;
         $this->getLastSql = $sql;
 
         if($return_way == 'result_array'){
