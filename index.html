@@ -34,7 +34,7 @@
 
 				var download_html = '';
 				$.each(download_url, function(k, v){
-					download_html += '<p><a href="' + v + 'v' + version + '" target="_blank">' + k  + '</a></p>';
+					download_html += '<p><a href="' + v + version + '" target="_blank">' + k  + '</a></p>';
 				});
 
 				$('#Download').after(download_html);
