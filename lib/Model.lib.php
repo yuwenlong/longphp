@@ -125,7 +125,7 @@ abstract class Model{
             $this->limit = ' LIMIT '.$this->limit;
         }
 
-        echo $sql = 'SELECT '.$this->select_fields.' FROM `'.$table_name.'`'.$this->where_str.$this->group_by.$this->order_by.$this->limit;
+        $sql = 'SELECT '.$this->select_fields.' FROM `'.$table_name.'`'.$this->where_str.$this->group_by.$this->order_by.$this->limit;
         $this->getLastSql = $sql;
 
         if($return_way == 'result_array'){
