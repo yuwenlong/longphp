@@ -42,7 +42,7 @@ switch (ENVIRONMENT)
 		exit(1); // EXIT_ERROR
 }
 
-$key = 'jfaawiaw;sadhawkjaw123SAWDasd';
+$key = 'jfaawiaw;sadhawkjaw12!3SAWDasd@';
 
 $uri = $_SERVER['REQUEST_URI'];
 $router = new Router();
