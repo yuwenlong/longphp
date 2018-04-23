@@ -119,6 +119,7 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0){
  *
  * */
 function M($model, $db = NULL){
+    global $global_mysql_object;
     $arr = explode('/', $model);
     $file = '';
     $count = count($arr) - 1;
@@ -157,7 +158,9 @@ function M($model, $db = NULL){
         $db_arr = include_once DIR_CONF.ENVIRONMENT.'/'.'db.conf.php';
     }
     require_once DIR_CLASS.'Mysql.class.php';
-    $db_object = new Mysql($db_arr[$db]['host'], $db_arr[$db]['port'], $db_arr[$db]['name'], $db_arr[$db]['pass'], $db_arr[$db]['database'], $db_arr[$db]['prefix'], $db_arr[$db]['charset']);
+    if(empty($global_mysql_object)){
+        $global_mysql_object = new Mysql($db_arr[$db]['host'], $db_arr[$db]['port'], $db_arr[$db]['name'], $db_arr[$db]['pass'], $db_arr[$db]['database'], $db_arr[$db]['prefix'], $db_arr[$db]['charset']);
+    }
 
     $model = new $filename;
     $model->init($db_object);
