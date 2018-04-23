@@ -163,7 +163,7 @@ function M($model, $db = NULL){
     }
 
     $model = new $filename;
-    $model->init($db_object);
+    $model->init($global_mysql_object);
 
     return $model;
 }
