@@ -56,7 +56,7 @@ abstract class Model{
         if(!empty($fields)){
             $fields_arr = explode(',', $fields);
             foreach($fields_arr as $fv){
-                $this->select_fields .= '`'.trim($fv).'`, ';
+                $this->select_fields .= trim($fv).', ';
             }
         }
 
@@ -65,10 +65,6 @@ abstract class Model{
     }
 
     protected function limit($m, $n = null){
-        if(empty($m)){
-            return false;
-        }
-
         $limit = trim($m).', ';
 
         if(!empty($n)){
@@ -134,6 +130,16 @@ abstract class Model{
             $res = $this->db->fetchFirst($sql);
         }
 
+        $this->_clear_variable();
+
         return $res;
+    }
+
+    private function _clear_variable(){
+        $this->select_fields = '';
+        $this->where_str = '';
+        $this->order_by = '';
+        $this->group_by = '';
+        $this->limit = '';
     }
 }
