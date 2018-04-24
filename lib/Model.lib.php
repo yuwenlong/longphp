@@ -10,31 +10,33 @@
 }
  
 abstract class Model{
+    public $getLastSql;
+
     protected $db;
-    protected $where_str;
-    protected $table_name;
-    protected $select_fields;
-    protected $limit;
-    protected $order_by;
-    protected $group_by;
-    protected $getLastSql;
+
+    private $_where_str;
+    private $_select_fields;
+    private $_limit;
+    private $_order_by;
+    private $_group_by;
+    private $_set;
 
     public function init($db){
         $this->db = $db;
     }
 
     protected function where($key, $value = ''){
-        if(!empty($this->where_str)){
-            $this->where_str .= ' AND ';
+        if(empty($this->_where_str)){
+            $this->_where_str = ' WHERE ';
         }
 
         if(is_array($key) && empty($value)){
             foreach($key as $kk => $vv){
                 $kk_arr = explode(' ', $kk);
                 if(count($kk_arr) == 1){
-                    $this->where_str .= '`'.trim($key).'` = \''.trim($vv).'\' AND ';
+                    $this->_where_str .= '`'.trim($key).'` = \''.trim($vv).'\' AND ';
                 }else {
-                    $this->where_str .= '`'.trim($kk_arr[0]).'` '.trim($kk_arr[1]).' '.trim($vv).' AND ';
+                    $this->_where_str .= '`'.trim($kk_arr[0]).'` '.trim($kk_arr[1]).' '.trim($vv).' AND ';
                 }
             }
         }
@@ -42,13 +44,12 @@ abstract class Model{
         if(!is_array($key) && !empty($value)){ 
             $kk_arr = explode(' ', $key);
             if(count($kk_arr) == 1){
-                $this->where_str .= '`'.trim($key).'` = \''.trim($value).'\' AND ';
+                $this->_where_str .= '`'.trim($key).'` = \''.trim($value).'\' AND ';
             }else {
-                $this->where_str .= '`'.$kk_arr[0].'` '.$kk_arr[1].' '.$value.' AND ';
+                $this->_where_str .= '`'.$kk_arr[0].'` '.$kk_arr[1].' '.$value.' AND ';
             }
         }
 
-        $this->where_str = mb_substr($this->where_str, 0, -4);
         return $this;
     }
 
@@ -56,11 +57,11 @@ abstract class Model{
         if(!empty($fields)){
             $fields_arr = explode(',', $fields);
             foreach($fields_arr as $fv){
-                $this->select_fields .= trim($fv).', ';
+                $this->_select_fields .= trim($fv).', ';
             }
         }
 
-        $this->select_fields = mb_substr($this->select_fields, 0, -2);
+        $this->_select_fields = mb_substr($this->_select_fields, 0, -2);
         return $this;
     }
 
@@ -71,25 +72,36 @@ abstract class Model{
             $limit .= trim($n).', ';
         }
 
-        $this->limit = mb_substr($limit, 0, -2);
+        $this->_limit = ' LIMIT '.mb_substr($limit, 0, -2);
         return $this;
     }
 
     protected function order_by($key, $sort = 'ASC'){
-        if(!empty($this->order_by)){
-            $this->order_by .= ', ';
+        if(empty($this->_order_by)){
+            $this->_order_by = ' ORDER BY ';
         }
-        $this->order_by .= '`'.trim($key).'` '.strtoupper(trim($sort)).', ';
-        $this->order_by = mb_substr($this->order_by, 0, -2);
+        $this->_order_by .= '`'.trim($key).'` '.strtoupper(trim($sort)).', ';
         return $this;
     }
 
     protected function group_by($key){
-        if(!empty($this->group_by)){
-            $this->group_by .= ', ';
+        if(empty($this->_group_by)){
+            $this->_group_by = ' GROUP BY ';
         }
-        $this->group_by .= '`'.trim($key).'`, ';
-        $this->group_by = mb_substr($this->group_by, 0, -2);
+        $this->_group_by .= '`'.trim($key).'`, ';
+        return $this;
+    }
+
+    protected function set($key, $value){
+        if(empty($key)){
+            return $this;
+        }
+
+        if(empty($this->_set)){
+            $this->_set = ' SET ';
+        }
+
+        $this->_set .= '`'.$key.'` = \''.$value.'\', ';
         return $this;
     }
 
@@ -101,27 +113,23 @@ abstract class Model{
             return false;
         }
 
-        if(empty($this->select_fields)){
-            $this->select_fields = '*';
+        if(empty($this->_select_fields)){
+            $this->_select_fields = '*';
         }
 
-        if(!empty($this->where_str)){
-            $this->where_str = ' WHERE '.$this->where_str;
-        }
-        
-        if(!empty($this->order_by)){
-            $this->order_by = ' ORDER BY '.$this->order_by;
-        }
-        
-        if(!empty($this->group_by)){
-            $this->group_by = ' GROUP BY '.$this->group_by;
+        if(!empty($this->_where_str)){
+            $this->_where_str = mb_substr($this->_where_str, 0, -4);
         }
 
-        if(!empty($this->limit)){
-            $this->limit = ' LIMIT '.$this->limit;
+        if(!empty($this->_order_by)){
+            $this->_order_by = mb_substr($this->_order_by, 0, -2);
         }
 
-        $sql = 'SELECT '.$this->select_fields.' FROM `'.$table_name.'`'.$this->where_str.$this->group_by.$this->order_by.$this->limit;
+        if(!empty($this->_group_by)){
+            $this->_group_by = mb_substr($this->_group_by, 0, -2);
+        }
+
+        $sql = 'SELECT '.$this->_select_fields.' FROM `'.$table_name.'`'.$this->_where_str.$this->_group_by.$this->_order_by.$this->_limit;
         $this->getLastSql = $sql;
 
         if($return_way == 'result_array'){
@@ -135,11 +143,33 @@ abstract class Model{
         return $res;
     }
 
+    protected function update($table_name){
+        if(empty($table_name)){
+            return false;
+        }
+
+        if(!empty($this->_where_str)){
+            $this->_where_str = mb_substr($this->_where_str, 0, -4);
+        }
+
+        if(!empty($this->_set)){
+            $this->_set = mb_substr($this->_set, 0, -2);
+        }
+
+        $sql = 'UPDATE `'.$table_name.'`'.$this->_set.$this->_where_str;
+        $this->getLastSql = $sql;
+        $res = $this->db->query($sql);
+
+        $this->_clear_variable();
+        return $res;
+    }
+
     private function _clear_variable(){
-        $this->select_fields = '';
-        $this->where_str = '';
-        $this->order_by = '';
-        $this->group_by = '';
-        $this->limit = '';
+        $this->_select_fields = '';
+        $this->_where_str = '';
+        $this->_order_by = '';
+        $this->_group_by = '';
+        $this->_limit = '';
+        $this->_set = '';
     }
 }
