@@ -29,7 +29,7 @@ class Mysql {
 		return $rows;
 	}
 	
-	function fetchFirst($sql){
+    function fetchFirst($sql){
 		$res = $this->query($sql);
 		return mysqli_fetch_assoc($res);
 	}
@@ -41,17 +41,17 @@ class Mysql {
 	function insert($tablename, $arr){
 		$set = '';
 		foreach((array)$arr as $k => $v){
-			$set .= '`'.$k.'` = \''.$v.'\', ';
+			$set .= '`'.$k.'` = \''.addslashes($v).'\', ';
 		}
 		$set = substr($set, 0, -2);
-		$sql = 'INSERT INTO `'.$this->prefix.$tablename.'` SET '.$set;
+        $sql = 'INSERT INTO `'.$this->prefix.$tablename.'` SET '.$set;
 		return $this->query($sql);
 	}
 	
 	function replace_into($tablename, $arr){
 		$set = '';
 		foreach((array)$arr as $k => $v){
-			$set .= '`'.$k.'` = \''.$v.'\', ';
+			$set .= '`'.$k.'` = \''.addslashes($v).'\', ';
 		}
 		$set = substr($set, 0, -2);
 		$sql = 'REPLACE INTO `'.$this->prefix.$tablename.'` SET '.$set;
