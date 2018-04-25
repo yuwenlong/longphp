@@ -34,9 +34,9 @@ abstract class Model{
             foreach($key as $kk => $vv){
                 $kk_arr = explode(' ', $kk);
                 if(count($kk_arr) == 1){
-                    $this->_where_str .= '`'.trim($key).'` = \''.trim($vv).'\' AND ';
+                    $this->_where_str .= '`'.trim($key).'` = \''.addslashes(trim($vv)).'\' AND ';
                 }else {
-                    $this->_where_str .= '`'.trim($kk_arr[0]).'` '.trim($kk_arr[1]).' '.trim($vv).' AND ';
+                    $this->_where_str .= '`'.trim($kk_arr[0]).'` '.trim($kk_arr[1]).' '.addslashes(trim($vv)).' AND ';
                 }
             }
         }
@@ -44,9 +44,9 @@ abstract class Model{
         if(!is_array($key) && !empty($value)){ 
             $kk_arr = explode(' ', $key);
             if(count($kk_arr) == 1){
-                $this->_where_str .= '`'.trim($key).'` = \''.trim($value).'\' AND ';
+                $this->_where_str .= '`'.trim($key).'` = \''.addslashes(trim($value)).'\' AND ';
             }else {
-                $this->_where_str .= '`'.$kk_arr[0].'` '.$kk_arr[1].' '.$value.' AND ';
+                $this->_where_str .= '`'.$kk_arr[0].'` '.$kk_arr[1].' '.addslashes(trim($value)).' AND ';
             }
         }
 
@@ -101,7 +101,7 @@ abstract class Model{
             $this->_set = ' SET ';
         }
 
-        $this->_set .= '`'.$key.'` = \''.$value.'\', ';
+        $this->_set .= '`'.$key.'` = \''.addslashes($value).'\', ';
         return $this;
     }
 
