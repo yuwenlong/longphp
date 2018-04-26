@@ -142,7 +142,9 @@ function M($model, $db = NULL){
     require_once DIR_LIB.'Model.lib.php';
     require_once DIR_MODEL.$file;
 
-    if(!class_exists($filename)){
+    $model_class_name = '\Model\\'.$filename;
+
+    if(!class_exists($model_class_name)){
         if(ENVIRONMENT == 'development'){
             exit('模型类：'.$filename.' 不存在');
         }else {
@@ -162,7 +164,8 @@ function M($model, $db = NULL){
         $global_mysql_object[$db] = new Mysql($db_arr[$db]['host'], $db_arr[$db]['port'], $db_arr[$db]['name'], $db_arr[$db]['pass'], $db_arr[$db]['database'], $db_arr[$db]['prefix'], $db_arr[$db]['charset']);
     }
 
-    $model = new $filename;
+    $model = new $model_class_name;
+
     $model->init($global_mysql_object[$db]);
 
     return $model;
