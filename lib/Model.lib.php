@@ -32,7 +32,7 @@ abstract class Model{
             $this->_where_str = ' WHERE ';
         }
 
-        if(is_array($key) && empty($value)){
+        if(is_array($key) && !isset($value)){
             foreach($key as $kk => $vv){
                 $kk_arr = explode(' ', $kk);
                 if(count($kk_arr) == 1){
@@ -43,12 +43,40 @@ abstract class Model{
             }
         }
 
-        if(!is_array($key) && !empty($value)){ 
+        if(!is_array($key) && isset($value)){ 
             $kk_arr = explode(' ', $key);
             if(count($kk_arr) == 1){
                 $this->_where_str .= '`'.trim($key).'` = \''.addslashes(trim($value)).'\' AND ';
             }else {
                 $this->_where_str .= '`'.$kk_arr[0].'` '.$kk_arr[1].' '.addslashes(trim($value)).' AND ';
+            }
+        }
+
+        return $this;
+    }
+    
+    protected function or_where($key, $value = ''){
+        if(empty($this->_where_str)){
+            $this->_where_str = ' WHERE ';
+        }
+
+        if(is_array($key) && empty($value)){
+            foreach($key as $kk => $vv){
+                $kk_arr = explode(' ', $kk);
+                if(count($kk_arr) == 1){
+                    $this->_where_str .= '`'.trim($key).'` = \''.addslashes(trim($vv)).'\' OR  ';
+                }else {
+                    $this->_where_str .= '`'.trim($kk_arr[0]).'` '.trim($kk_arr[1]).' '.addslashes(trim($vv)).' OR  ';
+                }
+            }
+        }
+
+        if(!is_array($key) && !empty($value)){ 
+            $kk_arr = explode(' ', $key);
+            if(count($kk_arr) == 1){
+                $this->_where_str .= '`'.trim($key).'` = \''.addslashes(trim($value)).'\' OR  ';
+            }else {
+                $this->_where_str .= '`'.$kk_arr[0].'` '.$kk_arr[1].' '.addslashes(trim($value)).' OR  ';
             }
         }
 
@@ -143,6 +171,10 @@ abstract class Model{
         $this->_clear_variable();
 
         return $res;
+    }
+
+    function get_insert_id(){
+        return $this->db->insert_id();
     }
 
     protected function update($table_name){
