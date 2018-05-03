@@ -29,16 +29,16 @@ abstract class Model{
 
     protected function where($key, $value = ''){
         if(empty($this->_where_str)){
-            $this->_where_str = ' WHERE ';
+            $this->_where_str = '';
         }
 
         if(is_array($key) && !isset($value)){
             foreach($key as $kk => $vv){
                 $kk_arr = explode(' ', $kk);
                 if(count($kk_arr) == 1){
-                    $this->_where_str .= '`'.trim($key).'` = \''.addslashes(trim($vv)).'\' AND ';
+                    $this->_where_str .= ' AND `'.trim($key).'` = \''.addslashes(trim($vv)).'\'';
                 }else {
-                    $this->_where_str .= '`'.trim($kk_arr[0]).'` '.trim($kk_arr[1]).' '.addslashes(trim($vv)).' AND ';
+                    $this->_where_str .= ' AND `'.trim($kk_arr[0]).'` '.trim($kk_arr[1]).' \''.addslashes(trim($vv)).'\'';
                 }
             }
         }
@@ -46,9 +46,9 @@ abstract class Model{
         if(!is_array($key) && isset($value)){ 
             $kk_arr = explode(' ', $key);
             if(count($kk_arr) == 1){
-                $this->_where_str .= '`'.trim($key).'` = \''.addslashes(trim($value)).'\' AND ';
+                $this->_where_str .= ' AND `'.trim($key).'` = \''.addslashes(trim($value)).'\'';
             }else {
-                $this->_where_str .= '`'.$kk_arr[0].'` '.$kk_arr[1].' '.addslashes(trim($value)).' AND ';
+                $this->_where_str .= ' AND `'.$kk_arr[0].'` '.$kk_arr[1].' \''.addslashes(trim($value)).'\'';
             }
         }
 
@@ -57,16 +57,16 @@ abstract class Model{
     
     protected function or_where($key, $value = ''){
         if(empty($this->_where_str)){
-            $this->_where_str = ' WHERE ';
+            $this->_where_str = '';
         }
 
         if(is_array($key) && empty($value)){
             foreach($key as $kk => $vv){
                 $kk_arr = explode(' ', $kk);
                 if(count($kk_arr) == 1){
-                    $this->_where_str .= '`'.trim($key).'` = \''.addslashes(trim($vv)).'\' OR  ';
+                    $this->_where_str .= ' OR  `'.trim($key).'` = \''.addslashes(trim($vv)).'\'';
                 }else {
-                    $this->_where_str .= '`'.trim($kk_arr[0]).'` '.trim($kk_arr[1]).' '.addslashes(trim($vv)).' OR  ';
+                    $this->_where_str .= ' OR  `'.trim($kk_arr[0]).'` '.trim($kk_arr[1]).' \''.addslashes(trim($vv)).'\'';
                 }
             }
         }
@@ -74,9 +74,9 @@ abstract class Model{
         if(!is_array($key) && !empty($value)){ 
             $kk_arr = explode(' ', $key);
             if(count($kk_arr) == 1){
-                $this->_where_str .= '`'.trim($key).'` = \''.addslashes(trim($value)).'\' OR  ';
+                $this->_where_str .= ' OR  `'.trim($key).'` = \''.addslashes(trim($value)).'\'';
             }else {
-                $this->_where_str .= '`'.$kk_arr[0].'` '.$kk_arr[1].' '.addslashes(trim($value)).' OR  ';
+                $this->_where_str .= ' OR  `'.$kk_arr[0].'` '.$kk_arr[1].' \''.addslashes(trim($value)).'\'';
             }
         }
 
@@ -148,7 +148,7 @@ abstract class Model{
         }
 
         if(!empty($this->_where_str)){
-            $this->_where_str = mb_substr($this->_where_str, 0, -4);
+            $this->_where_str = ' WHERE '.mb_substr($this->_where_str, 4);
         }
 
         if(!empty($this->_order_by)){
