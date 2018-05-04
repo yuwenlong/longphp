@@ -183,7 +183,7 @@ abstract class Model{
         }
 
         if(!empty($this->_where_str)){
-            $this->_where_str = mb_substr($this->_where_str, 0, -4);
+            $this->_where_str = ' WHERE '.mb_substr($this->_where_str, 4);
         }
 
         if(!empty($this->_set)){
