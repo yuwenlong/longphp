@@ -82,7 +82,7 @@ class Request {
 
     public static function post_int($parameter){
         if(!isset($_POST[$parameter])){
-            return NULL;
+            return 0;
         }else {
             return self::__int($_POST[$parameter]);
         }
@@ -90,7 +90,7 @@ class Request {
 
     public static function get_int($parameter){
         if(!isset($_GET[$parameter])){
-            return NULL;
+            return 0;
         }else {
             return self::__int($_GET[$parameter]);
         }
