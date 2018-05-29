@@ -73,11 +73,11 @@
                     <h2 id="Nginx">Nginx配置</h2>
                     <p>放在根目录下</p>
                     <pre>location / {
-    try_files $uri $uri/ /index.php;
+    try_files $uri $uri/ /index.php?$uri&$args;
 }</pre>
                     <p>二级根目录xxxx下</p>
                     <pre>location /xxxx/ {
-    try_files ^/xxxx/$uri xxxx/$uri/ /xxxx/index.php;
+    try_files ^/xxxx/$uri xxxx/$uri/ /xxxx/index.php?$uri&$args;
 }</pre>
                     
                     <h2 id="Routing">路由说明</h2>
