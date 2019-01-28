@@ -30,18 +30,14 @@
 
 				var download_url = new Object();
 				
-				download_url.github = 'https://github.com/yuwenlong/longphp/releases/tag/' + version;
-				download_url.oschina = 'https://gitee.com/longphp/longphp/releases/' + version;
-				download_url.tencent = 'https://dev.tencent.com/u/yuwenlong/p/longphp/git/tree/' + version;
+				download_url.github = 'https://github.com/yuwenlong/longphp/releases/tag/';
+				download_url.oschina = 'https://gitee.com/longphp/longphp/releases/';
+				download_url.tencent = 'https://dev.tencent.com/u/yuwenlong/p/longphp/git/tree/';
 
 				var download_html = '';
                 var href = '';
 				$.each(download_url, function(k, v){
                     href = v + version;
-
-                    if(k == 'oschina'){
-                        href = v;
-                    }
 
 					download_html += '<p><a href="' + href + '" target="_blank">' + k  + '</a></p>';
 				});
