@@ -15,12 +15,24 @@ class Router{
     }
 
     private function load(){
-        $uri_arr = explode('?', $_SERVER['REQUEST_URI']);
+        global $argv;
+
+        if (PHP_SAPI === 'cli') {
+            $request_uri = $argv[1];
+        }else {
+            $request_uri = $_SERVER['REQUEST_URI'];
+        }
+        $uri_arr = explode('?', $request_uri);
 
         if(count($uri_arr) == 2){
             $get_params = explode('&', $uri_arr[1]);
             foreach($get_params as $get_v){
                 $get_vs = explode('=', $get_v);
+                
+                if(count($get_vs) != 2){
+                    continue;
+                }
+                
                 $_GET[$get_vs[0]] = $get_vs[1];
             }
         }

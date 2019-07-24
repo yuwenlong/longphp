@@ -1,5 +1,5 @@
 <?php
-define('LONGPHP_VERSION', '1.0.0');
+define('LONGPHP_VERSION', '1.0.1');
 define('DIR', strtr(dirname(dirname(__FILE__)), array('\\'=>'/')).'/');
 define('DIR_CONTROLLER', DIR.'controller/');
 define('DIR_CLASS', DIR.'class/');
@@ -44,6 +44,11 @@ switch (ENVIRONMENT)
 
 $key = 'jfaawiaw;sadhawkjaw12@3SAWDasd!';
 
-$uri = $_SERVER['REQUEST_URI'];
+if (PHP_SAPI === 'cli'){
+	$uri = $argv[1];
+}else {
+	$uri = $_SERVER['REQUEST_URI'];
+}
+
 $router = new Router();
 $router->run();
