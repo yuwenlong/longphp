@@ -1,5 +1,5 @@
 <?php
-define('LONGPHP_VERSION', '1.0.1');
+define('LONGPHP_VERSION', '1.0.0');
 define('DIR', strtr(dirname(dirname(__FILE__)), array('\\'=>'/')).'/');
 define('DIR_CONTROLLER', DIR.'controller/');
 define('DIR_CLASS', DIR.'class/');
