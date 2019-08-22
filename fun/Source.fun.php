@@ -7,8 +7,8 @@ function autoload($uri){
     $file = '';
     $uri_arr = explode('/', $uri);
     $classname = ucwords(strtolower(array_pop($uri_arr)));
-
-	$action = 'Action_'.$classname;
+    
+    $action = 'Action_'.$classname;
     $classname = htmlspecialchars($classname, ENT_QUOTES, 'UTF-8');
     if($uri_arr){
         $file = implode('/', $uri_arr).'/';
