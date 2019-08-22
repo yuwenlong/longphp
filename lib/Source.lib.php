@@ -44,6 +44,11 @@ switch (ENVIRONMENT)
 
 $key = 'jfaawiaw;sadhawkjaw12@3SAWDasd!';
 
-$uri = $_SERVER['REQUEST_URI'];
+if (PHP_SAPI === 'cli'){
+	$uri = $argv[1];
+}else {
+	$uri = $_SERVER['REQUEST_URI'];
+}
+
 $router = new Router();
 $router->run();
