@@ -1,5 +1,8 @@
-.idea/
-tpl_c/
-session/
-www/upload/
-vendor/
+.idea
+.vscode
+.env
+*.log
+log/
+*.swp
+
+!/class/log/
