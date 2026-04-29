@@ -1,0 +1,14 @@
+# Robots.txt for Longphp
+# https://www.longphp.com/
+
+User-agent: *
+Allow: /
+
+# 禁止爬取静态资源目录
+Disallow: /static/
+
+# Sitemap 位置
+Sitemap: https://www.longphp.com/sitemap.xml
+
+# 爬取延迟（秒）
+Crawl-delay: 1

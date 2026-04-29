@@ -3,9 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Longphp - 轻量级 PHP 开发框架</title>
-    <meta name="keywords" content="php框架, longphp, 轻量级, MVC, 依赖注入, 零依赖">
-    <meta name="description" content="Longphp 是一款轻量级、零依赖的 PHP MVC 开发框架，支持 CLI 和 WEB 双模式运行">
+    <title>Longphp - 轻量级 PHP 开发框架 | 零依赖 MVC 架构</title>
+    <meta name="keywords" content="php框架, longphp, 轻量级PHP框架, MVC框架, 依赖注入, 零依赖PHP, PHP开发框架, CLI框架, PHP快速开发, 轻量级MVC">
+    <meta name="description" content="Longphp 是一款轻量级、零依赖的 PHP MVC 开发框架。支持 CLI 和 WEB 双模式运行，内置依赖注入、自动加载、日志系统。简洁优雅，让 PHP 开发回归纯粹。">
+    <meta name="author" content="于文龙">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0a0f">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.longphp.com/">
+    <meta property="og:title" content="Longphp - 轻量级 PHP 开发框架 | 零依赖 MVC 架构">
+    <meta property="og:description" content="Longphp 是一款轻量级、零依赖的 PHP MVC 开发框架。支持 CLI 和 WEB 双模式运行，内置依赖注入、自动加载、日志系统。">
+    <meta property="og:image" content="https://www.longphp.com/og-image.png">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="Longphp">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.longphp.com/">
+    <meta name="twitter:title" content="Longphp - 轻量级 PHP 开发框架 | 零依赖 MVC 架构">
+    <meta name="twitter:description" content="Longphp 是一款轻量级、零依赖的 PHP MVC 开发框架。支持 CLI 和 WEB 双模式运行，内置依赖注入、自动加载、日志系统。">
+    <meta name="twitter:image" content="https://www.longphp.com/og-image.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.longphp.com/">
+    
+    <!-- 结构化数据 JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Longphp",
+        "description": "Longphp 是一款轻量级、零依赖的 PHP MVC 开发框架。支持 CLI 和 WEB 双模式运行，内置依赖注入、自动加载、日志系统。",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "PHP 8.0+",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "于文龙",
+            "url": "https://www.yuwenlong.cn/"
+        },
+        "softwareVersion": "1.1.0",
+        "downloadUrl": "https://github.com/yuwenlong/longphp",
+        "codeRepositoryUrl": "https://github.com/yuwenlong/longphp",
+        "license": "https://license.coscl.org.cn/MulanPSL2"
+    }
+    </script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐉</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -778,39 +826,39 @@
 </head>
 <body>
     <!-- 导航栏 -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="主导航">
         <div class="nav-content">
-            <a href="#" class="logo">
-                <span class="logo-icon">🐉</span>
+            <a href="#" class="logo" aria-label="Longphp 首页">
+                <span class="logo-icon" aria-hidden="true">🐉</span>
                 <span class="logo-text">Longphp</span>
             </a>
-            <ul class="nav-links">
-                <li><a href="#features">特性</a></li>
-                <li><a href="#quickstart">快速开始</a></li>
-                <li><a href="#architecture">架构</a></li>
-                <li><a href="#download">下载</a></li>
+            <ul class="nav-links" role="menubar">
+                <li role="none"><a href="#features" role="menuitem">特性</a></li>
+                <li role="none"><a href="#quickstart" role="menuitem">快速开始</a></li>
+                <li role="none"><a href="#architecture" role="menuitem">架构</a></li>
+                <li role="none"><a href="#download" role="menuitem">下载</a></li>
             </ul>
-            <button class="menu-btn" aria-label="菜单">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="menu-btn" aria-label="打开菜单" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
             </button>
         </div>
     </nav>
 
     <!-- Hero 区域 -->
-    <section class="hero">
-        <div class="hero-bg">
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-bg" aria-hidden="true">
             <div class="hero-gradient hero-gradient-1"></div>
             <div class="hero-gradient hero-gradient-2"></div>
             <div class="hero-grid"></div>
         </div>
         <div class="hero-content">
             <div class="hero-badge">
-                <span>🚀</span>
+                <span aria-hidden="true">🚀</span>
                 <span>v1.1.0 已发布</span>
             </div>
-            <h1 class="hero-title">
+            <h1 id="hero-title" class="hero-title">
                 构建优雅的<br><span>PHP 应用</span>
             </h1>
             <p class="hero-subtitle">
@@ -818,24 +866,24 @@
             </p>
             <div class="hero-actions">
                 <a href="#quickstart" class="btn btn-primary">
-                    <span>🚀</span>
+                    <span aria-hidden="true">🚀</span>
                     快速开始
                 </a>
-                <a href="https://github.com/yuwenlong/longphp" target="_blank" class="btn btn-secondary">
-                    <span>⭐</span>
+                <a href="https://github.com/yuwenlong/longphp" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <span aria-hidden="true">⭐</span>
                     GitHub
                 </a>
             </div>
-            <div class="hero-stats">
-                <div class="stat">
+            <div class="hero-stats" role="list">
+                <div class="stat" role="listitem">
                     <div class="stat-value">0</div>
                     <div class="stat-label">第三方依赖</div>
                 </div>
-                <div class="stat">
+                <div class="stat" role="listitem">
                     <div class="stat-value">8.0+</div>
                     <div class="stat-label">PHP 版本要求</div>
                 </div>
-                <div class="stat">
+                <div class="stat" role="listitem">
                     <div class="stat-value">MVC</div>
                     <div class="stat-label">架构模式</div>
                 </div>
@@ -844,55 +892,55 @@
     </section>
 
     <!-- 特性区域 -->
-    <section class="section section-alt" id="features">
+    <section class="section section-alt" id="features" aria-labelledby="features-title">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-badge">✨ 核心特性</span>
-                <h2 class="section-title">为高效开发而生</h2>
+                <span class="section-badge" aria-hidden="true">✨ 核心特性</span>
+                <h2 id="features-title" class="section-title">为高效开发而生</h2>
                 <p class="section-desc">精心设计的每一个特性，都是为了让您的开发体验更加流畅</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card reveal">
-                    <div class="feature-icon">🎯</div>
+            <div class="features-grid" role="list">
+                <article class="feature-card reveal" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">🎯</div>
                     <h3 class="feature-title">零依赖设计</h3>
                     <p class="feature-desc">不依赖 Composer，纯原生 PHP 实现。下载即用，无需额外配置，让项目保持轻盈。</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon">🏗️</div>
+                </article>
+                <article class="feature-card reveal" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">🏗️</div>
                     <h3 class="feature-title">MVC 架构</h3>
                     <p class="feature-desc">清晰的 Controller → Service → Model 三层分离，代码组织井然有序，易于维护。</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon">🔄</div>
+                </article>
+                <article class="feature-card reveal" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">🔄</div>
                     <h3 class="feature-title">双模式运行</h3>
                     <p class="feature-desc">CLI 命令行 + WEB HTTP 统一控制器编写方式，一套代码，多种运行方式。</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon">💉</div>
+                </article>
+                <article class="feature-card reveal" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">💉</div>
                     <h3 class="feature-title">自动依赖注入</h3>
                     <p class="feature-desc">基于反射的自动 DI 容器，构造器自动注入依赖，告别手动实例化的繁琐。</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon">📂</div>
+                </article>
+                <article class="feature-card reveal" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">📂</div>
                     <h3 class="feature-title">智能自动加载</h3>
                     <p class="feature-desc">命名空间直接映射文件路径，无需手动 require，代码组织更加清晰。</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon">📝</div>
+                </article>
+                <article class="feature-card reveal" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">📝</div>
                     <h3 class="feature-title">日志系统</h3>
                     <p class="feature-desc">按日期自动分文件，支持 info/error/warn 三级日志，问题排查更加高效。</p>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- 快速开始 -->
-    <section class="section" id="quickstart">
+    <section class="section" id="quickstart" aria-labelledby="quickstart-title">
         <div class="container">
             <div class="code-section">
                 <div class="code-info reveal">
-                    <span class="section-badge">🚀 快速开始</span>
-                    <h2>三步上手</h2>
+                    <span class="section-badge" aria-hidden="true">🚀 快速开始</span>
+                    <h2 id="quickstart-title">三步上手</h2>
                     <p>从零开始构建您的第一个 Longphp 应用，只需简单三步</p>
                     <ol class="code-steps">
                         <li>
@@ -908,12 +956,12 @@
                 </div>
                 <div class="code-block reveal">
                     <div class="code-header">
-                        <span class="code-dot"></span>
-                        <span class="code-dot"></span>
-                        <span class="code-dot"></span>
+                        <span class="code-dot" aria-hidden="true"></span>
+                        <span class="code-dot" aria-hidden="true"></span>
+                        <span class="code-dot" aria-hidden="true"></span>
                         <span class="code-filename">terminal</span>
                     </div>
-                    <div class="code-content">
+                    <div class="code-content" role="region" aria-label="安装命令示例">
 <pre><span class="code-comment"># 克隆项目</span>
 <span class="code-keyword">git</span> clone https://github.com/yuwenlong/longphp.git
 <span class="code-keyword">cd</span> longphp
@@ -933,22 +981,22 @@
     </section>
 
     <!-- 代码示例 -->
-    <section class="section section-alt">
+    <section class="section section-alt" id="code-examples" aria-labelledby="code-title">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-badge">💻 代码示例</span>
-                <h2 class="section-title">优雅简洁的代码</h2>
+                <span class="section-badge" aria-hidden="true">💻 代码示例</span>
+                <h2 id="code-title" class="section-title">优雅简洁的代码</h2>
                 <p class="section-desc">清晰的代码结构，让开发成为一种享受</p>
             </div>
             <div class="code-section">
                 <div class="code-block reveal">
                     <div class="code-header">
-                        <span class="code-dot"></span>
-                        <span class="code-dot"></span>
-                        <span class="code-dot"></span>
+                        <span class="code-dot" aria-hidden="true"></span>
+                        <span class="code-dot" aria-hidden="true"></span>
+                        <span class="code-dot" aria-hidden="true"></span>
                         <span class="code-filename">controller/cli/GetDataSources.php</span>
                     </div>
-                    <div class="code-content">
+                    <div class="code-content" role="region" aria-label="控制器代码示例">
 <pre><span class="code-keyword">&lt;?php</span>
 
 <span class="code-keyword">namespace</span> <span class="code-namespace">controller\cli</span>;
@@ -981,7 +1029,7 @@
                         <span class="code-dot"></span>
                         <span class="code-filename">model/AttackDsModel.php</span>
                     </div>
-                    <div class="code-content">
+                    <div class="code-content" role="region" aria-label="模型代码示例">
 <pre><span class="code-keyword">&lt;?php</span>
 
 <span class="code-keyword">namespace</span> <span class="code-namespace">model</span>;
@@ -1011,34 +1059,34 @@
     </section>
 
     <!-- 架构图 -->
-    <section class="section" id="architecture">
+    <section class="section" id="architecture" aria-labelledby="arch-title">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-badge">🏗️ 架构设计</span>
-                <h2 class="section-title">清晰的分层架构</h2>
+                <span class="section-badge" aria-hidden="true">🏗️ 架构设计</span>
+                <h2 id="arch-title" class="section-title">清晰的分层架构</h2>
                 <p class="section-desc">每一层各司其职，让代码更加易于理解和维护</p>
             </div>
-            <div class="arch-visual reveal">
+            <div class="arch-visual reveal" role="img" aria-label="MVC 分层架构图：请求入口 → Controller → Service → Model">
                 <div class="arch-box">
-                    <div class="arch-box-icon">🌐</div>
+                    <div class="arch-box-icon" aria-hidden="true">🌐</div>
                     <div class="arch-box-title">请求入口</div>
                     <div class="arch-box-desc">CLI / WEB</div>
                 </div>
-                <div class="arch-arrow">→</div>
+                <div class="arch-arrow" aria-hidden="true">→</div>
                 <div class="arch-box">
-                    <div class="arch-box-icon">🎛️</div>
+                    <div class="arch-box-icon" aria-hidden="true">🎛️</div>
                     <div class="arch-box-title">Controller</div>
                     <div class="arch-box-desc">请求处理</div>
                 </div>
-                <div class="arch-arrow">→</div>
+                <div class="arch-arrow" aria-hidden="true">→</div>
                 <div class="arch-box">
-                    <div class="arch-box-icon">⚙️</div>
+                    <div class="arch-box-icon" aria-hidden="true">⚙️</div>
                     <div class="arch-box-title">Service</div>
                     <div class="arch-box-desc">业务逻辑</div>
                 </div>
-                <div class="arch-arrow">→</div>
+                <div class="arch-arrow" aria-hidden="true">→</div>
                 <div class="arch-box">
-                    <div class="arch-box-icon">🗄️</div>
+                    <div class="arch-box-icon" aria-hidden="true">🗄️</div>
                     <div class="arch-box-title">Model</div>
                     <div class="arch-box-desc">数据操作</div>
                 </div>
@@ -1047,26 +1095,26 @@
     </section>
 
     <!-- 下载区 -->
-    <section class="section section-alt download-section" id="download">
+    <section class="section section-alt download-section" id="download" aria-labelledby="download-title">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-badge">📦 立即下载</span>
-                <h2 class="section-title">开始您的项目</h2>
+                <span class="section-badge" aria-hidden="true">📦 立即下载</span>
+                <h2 id="download-title" class="section-title">开始您的项目</h2>
                 <p class="section-desc">选择您喜欢的方式获取 Longphp</p>
             </div>
-            <div class="download-cards reveal">
-                <a href="https://github.com/yuwenlong/longphp" target="_blank" class="download-card">
-                    <div class="download-icon">⭐</div>
+            <div class="download-cards reveal" role="list">
+                <a href="https://github.com/yuwenlong/longphp" target="_blank" rel="noopener noreferrer" class="download-card" role="listitem">
+                    <div class="download-icon" aria-hidden="true">⭐</div>
                     <div class="download-title">GitHub</div>
                     <div class="download-desc">获取最新源码</div>
                 </a>
-                <a href="https://gitee.com/longphp/longphp" target="_blank" class="download-card">
-                    <div class="download-icon">🔗</div>
+                <a href="https://gitee.com/longphp/longphp" target="_blank" rel="noopener noreferrer" class="download-card" role="listitem">
+                    <div class="download-icon" aria-hidden="true">🔗</div>
                     <div class="download-title">Gitee</div>
                     <div class="download-desc">国内镜像</div>
                 </a>
-                <a href="https://gitee.com/longphp/longphp/blob/master/README.md" target="_blank" class="download-card">
-                    <div class="download-icon">📖</div>
+                <a href="https://gitee.com/longphp/longphp/blob/master/README.md" target="_blank" rel="noopener noreferrer" class="download-card" role="listitem">
+                    <div class="download-icon" aria-hidden="true">📖</div>
                     <div class="download-title">文档</div>
                     <div class="download-desc">详细使用说明</div>
                 </a>
@@ -1075,10 +1123,10 @@
     </section>
 
     <!-- 页脚 -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="footer-content">
             <div class="footer-logo">
-                <span class="logo-icon">🐉</span>
+                <span class="logo-icon" aria-hidden="true">🐉</span>
                 <span class="logo-text">Longphp</span>
             </div>
             <div class="footer-links">
