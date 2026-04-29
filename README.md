@@ -1,4 +1,4 @@
-# 🐘 Longphp
+# 🐉 Longphp
 
 [![PHP Version](https://img.shields.io/badge/PHP-8.0+-blue?style=flat-square&logo=php)](https://www.php.net/)
 [![Version](https://img.shields.io/badge/Version-1.1.0-green?style=flat-square)]()
@@ -564,6 +564,6 @@ for ($i = 0; $i < $total; $i++) {
 ---
 
 <p align="center">
-  <strong>🐘 Longphp</strong> - 轻量级 PHP 开发框架<br>
+  <strong>🐉 Longphp</strong> - 轻量级 PHP 开发框架<br>
   <sub>Made with ❤️ by Longphp Developers</sub>
 </p>
