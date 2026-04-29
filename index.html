@@ -1,88 +1,1178 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <meta http-equiv="X-UA-Compatible" content="chrome=1">
-        <title>longphp 相关文档</title>
-        <meta name="keywords" content="php,于文龙,文龙,longphp,Longphp,php框架,框架,php轻框架">
-        <meta name="description" content="longphp框架 相关文档，为了生活可以忍，侮辱技术就不行">
-		<link rel="stylesheet" href="./static/bootstrap.min.css">
-        <script type="text/javascript" src="./static/jquery.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <style type="text/css">
-            footer{width: auto;}
-            .red{color: red;}
-            .nav>li>a{padding: 5px;}
-            .x{display: none !important;}
-        </style>
-		<script type="text/javascript">
-            var _hmt = _hmt || [];
-            (function() {
-                var hm = document.createElement("script");
-                hm.src = "https://hm.baidu.com/hm.js?eca31b739c336e3b8df84deda27c9601";
-                var s = document.getElementsByTagName("script")[0];
-                s.parentNode.insertBefore(hm, s);
-            })();
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Longphp - 轻量级 PHP 开发框架</title>
+    <meta name="keywords" content="php框架, longphp, 轻量级, MVC, 依赖注入, 零依赖">
+    <meta name="description" content="Longphp 是一款轻量级、零依赖的 PHP MVC 开发框架，支持 CLI 和 WEB 双模式运行">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐉</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a25;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --accent-1: #6366f1;
+            --accent-2: #8b5cf6;
+            --accent-3: #06b6d4;
+            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+            --gradient-2: linear-gradient(135deg, #1a1a25 0%, #0a0a0f 100%);
+            --shadow-glow: 0 0 60px rgba(99, 102, 241, 0.3);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+        }
 
-			$(function(){
-				var version = "1.1.0";
-				$('#version').html(version);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-				var download_url = new Object();
-				
-				download_url.github = 'https://github.com/yuwenlong/longphp';
-				download_url.oschina = 'https://gitee.com/longphp/longphp';
+        html {
+            scroll-behavior: smooth;
+        }
 
-				var download_html = '';
-                var href = '';
-				$.each(download_url, function(k, v){
-                    href = v;
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-					download_html += '<p><a href="' + href + '" target="_blank">' + k  + '</a></p>';
-				});
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
 
-				$('#Download').after(download_html);
-			});
-		</script>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    </head>
-    <body youdao="bind">
-        <div class="container bs-docs-container">
-            <div class="row">
-                <div class="col-md-9">
-                    <h2 id="Info">框架简介</h2>
-                    <h3>作者：<a href="https://yuwenlong.cn/">于文龙</a></h3>
-                    <h4>框架名称：Longphp</h4>
-                    <h5>当前框架最新版本：<span class="red" id="version"></span></h5>
-                    <p>一个轻框架，配置简单，不臃肿。本框架使用协议：木兰宽松许可证, 第2版</p>
-                    
-                    <h2 id="Download">框架下载地址</h2>
-                    
-                    <p>
-                        文档详情：<a href="https://gitee.com/longphp/longphp/blob/master/README.md" target="_blank">点击查看</a>
-                    </p>
+        .navbar.scrolled {
+            padding: 0.75rem 2rem;
+            background: rgba(10, 10, 15, 0.95);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero 区域 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 6rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .hero-gradient {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.4;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-gradient-1 {
+            top: -200px;
+            right: -200px;
+            background: var(--accent-1);
+        }
+
+        .hero-gradient-2 {
+            bottom: -300px;
+            left: -300px;
+            background: var(--accent-3);
+            animation-delay: -4s;
+        }
+
+        .hero-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            color: var(--accent-1);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero-title span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 通用区块 */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-alt {
+            background: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            color: var(--accent-1);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 特性卡片 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* 代码展示区 */
+        .code-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .code-info h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .code-info p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .code-steps {
+            list-style: none;
+            counter-reset: step;
+        }
+
+        .code-steps li {
+            counter-increment: step;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .code-steps li::before {
+            content: counter(step);
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-1);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .code-steps li span {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .code-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot:nth-child(1) { background: #ff5f57; }
+        .code-dot:nth-child(2) { background: #ffbd2e; }
+        .code-dot:nth-child(3) { background: #28ca42; }
+
+        .code-filename {
+            margin-left: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .code-content {
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-content pre {
+            margin: 0;
+            white-space: pre;
+        }
+
+        .code-keyword { color: #c678dd; }
+        .code-function { color: #61afef; }
+        .code-string { color: #98c379; }
+        .code-comment { color: #5c6370; font-style: italic; }
+        .code-variable { color: #e5c07b; }
+        .code-class { color: #e5c07b; }
+        .code-namespace { color: #61afef; }
+
+        /* 架构图 */
+        .arch-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding: 3rem 0;
+        }
+
+        .arch-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .arch-box:hover {
+            transform: scale(1.05);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .arch-box-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .arch-box-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .arch-box-desc {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .arch-arrow {
+            font-size: 2rem;
+            color: var(--accent-1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: translateX(0); }
+            50% { opacity: 1; transform: translateX(5px); }
+        }
+
+        /* 下载区 */
+        .download-section {
+            text-align: center;
+        }
+
+        .download-cards {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .download-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 2.5rem 3rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            min-width: 220px;
+        }
+
+        .download-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .download-icon {
+            font-size: 3rem;
+        }
+
+        .download-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .download-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* 页脚 */
+        .footer {
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-subtle);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 1.5rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-copyright {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .footer-copyright a {
+            color: var(--accent-1);
+            text-decoration: none;
+        }
+
+        /* 滚动动画 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 响应式 */
+        @media (max-width: 968px) {
+            .code-section {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .arch-arrow {
+                transform: rotate(90deg);
+            }
+
+            .arch-visual {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        /* 移动端菜单按钮 */
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-btn span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">
+                <span class="logo-icon">🐉</span>
+                <span class="logo-text">Longphp</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">特性</a></li>
+                <li><a href="#quickstart">快速开始</a></li>
+                <li><a href="#architecture">架构</a></li>
+                <li><a href="#download">下载</a></li>
+            </ul>
+            <button class="menu-btn" aria-label="菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-gradient hero-gradient-1"></div>
+            <div class="hero-gradient hero-gradient-2"></div>
+            <div class="hero-grid"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>🚀</span>
+                <span>v1.1.0 已发布</span>
+            </div>
+            <h1 class="hero-title">
+                构建优雅的<br><span>PHP 应用</span>
+            </h1>
+            <p class="hero-subtitle">
+                Longphp 是一款轻量级、零依赖的 PHP MVC 开发框架。简洁的架构设计，让开发回归纯粹。
+            </p>
+            <div class="hero-actions">
+                <a href="#quickstart" class="btn btn-primary">
+                    <span>🚀</span>
+                    快速开始
+                </a>
+                <a href="https://github.com/yuwenlong/longphp" target="_blank" class="btn btn-secondary">
+                    <span>⭐</span>
+                    GitHub
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">第三方依赖</div>
                 </div>
-                
-                <div class="col-md-3">
-                    <nav id="nav" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
-                        <ul class="nav bs-docs-sidenav">
-                            <li><a href="/#Info">框架简介</a></li>
-                            <li><a href="/#Download">框架下载地址</a></li>
-                        </ul>
-                    </nav>
+                <div class="stat">
+                    <div class="stat-value">8.0+</div>
+                    <div class="stat-label">PHP 版本要求</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">MVC</div>
+                    <div class="stat-label">架构模式</div>
                 </div>
             </div>
-
-            <footer style="font-family: 微软雅黑; padding-bottom:15px;">© 2018 Powered by yuwenlong <a style="color:#000" href="https://beian.miit.gov.cn/" target="_blank">京ICP备2022003683号-3</a></footer>
         </div>
-        
-        <script type="text/javascript">
-            $('.nav a').on('click', function(){
-                var href = $(this).attr('href');
-                $('.info').addClass('x');
-                $(href + '_info').removeClass('x');
+    </section>
+
+    <!-- 特性区域 -->
+    <section class="section section-alt" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-badge">✨ 核心特性</span>
+                <h2 class="section-title">为高效开发而生</h2>
+                <p class="section-desc">精心设计的每一个特性，都是为了让您的开发体验更加流畅</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">零依赖设计</h3>
+                    <p class="feature-desc">不依赖 Composer，纯原生 PHP 实现。下载即用，无需额外配置，让项目保持轻盈。</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🏗️</div>
+                    <h3 class="feature-title">MVC 架构</h3>
+                    <p class="feature-desc">清晰的 Controller → Service → Model 三层分离，代码组织井然有序，易于维护。</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">双模式运行</h3>
+                    <p class="feature-desc">CLI 命令行 + WEB HTTP 统一控制器编写方式，一套代码，多种运行方式。</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">💉</div>
+                    <h3 class="feature-title">自动依赖注入</h3>
+                    <p class="feature-desc">基于反射的自动 DI 容器，构造器自动注入依赖，告别手动实例化的繁琐。</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">📂</div>
+                    <h3 class="feature-title">智能自动加载</h3>
+                    <p class="feature-desc">命名空间直接映射文件路径，无需手动 require，代码组织更加清晰。</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">📝</div>
+                    <h3 class="feature-title">日志系统</h3>
+                    <p class="feature-desc">按日期自动分文件，支持 info/error/warn 三级日志，问题排查更加高效。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 快速开始 -->
+    <section class="section" id="quickstart">
+        <div class="container">
+            <div class="code-section">
+                <div class="code-info reveal">
+                    <span class="section-badge">🚀 快速开始</span>
+                    <h2>三步上手</h2>
+                    <p>从零开始构建您的第一个 Longphp 应用，只需简单三步</p>
+                    <ol class="code-steps">
+                        <li>
+                            <span>克隆项目到本地</span>
+                        </li>
+                        <li>
+                            <span>配置环境变量 .env</span>
+                        </li>
+                        <li>
+                            <span>启动开发服务器</span>
+                        </li>
+                    </ol>
+                </div>
+                <div class="code-block reveal">
+                    <div class="code-header">
+                        <span class="code-dot"></span>
+                        <span class="code-dot"></span>
+                        <span class="code-dot"></span>
+                        <span class="code-filename">terminal</span>
+                    </div>
+                    <div class="code-content">
+<pre><span class="code-comment"># 克隆项目</span>
+<span class="code-keyword">git</span> clone https://github.com/yuwenlong/longphp.git
+<span class="code-keyword">cd</span> longphp
+
+<span class="code-comment"># 复制配置文件</span>
+<span class="code-keyword">cp</span> .env.online .env
+
+<span class="code-comment"># 启动 WEB 服务器</span>
+<span class="code-keyword">php</span> -S localhost:8080 -t public/
+
+<span class="code-comment"># 或运行 CLI 命令</span>
+<span class="code-keyword">php</span> -f cli.php</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 代码示例 -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-badge">💻 代码示例</span>
+                <h2 class="section-title">优雅简洁的代码</h2>
+                <p class="section-desc">清晰的代码结构，让开发成为一种享受</p>
+            </div>
+            <div class="code-section">
+                <div class="code-block reveal">
+                    <div class="code-header">
+                        <span class="code-dot"></span>
+                        <span class="code-dot"></span>
+                        <span class="code-dot"></span>
+                        <span class="code-filename">controller/cli/GetDataSources.php</span>
+                    </div>
+                    <div class="code-content">
+<pre><span class="code-keyword">&lt;?php</span>
+
+<span class="code-keyword">namespace</span> <span class="code-namespace">controller\cli</span>;
+
+<span class="code-keyword">use</span> controller\baseController;
+<span class="code-keyword">use</span> model\attackDsModel;
+<span class="code-keyword">use</span> service\datasourceService;
+
+<span class="code-keyword">class</span> <span class="code-class">GetDataSources</span> <span class="code-keyword">extends</span> <span class="code-class">baseController</span>
+{
+    <span class="code-keyword">public function</span> <span class="code-function">__construct</span>(
+        <span class="code-keyword">private</span> <span class="code-class">attackDsModel</span> <span class="code-variable">$model</span>,
+        <span class="code-keyword">private</span> <span class="code-class">datasourceService</span> <span class="code-variable">$service</span>
+    ) {
+        <span class="code-keyword">parent</span>::<span class="code-function">__construct</span>();
+    }
+
+    <span class="code-keyword">public function</span> <span class="code-function">run</span>(): <span class="code-keyword">void</span>
+    {
+        <span class="code-variable">$data</span> = <span class="code-variable">$this</span>-&gt;service-&gt;<span class="code-function">fetch</span>();
+        <span class="code-variable">$this</span>-&gt;model-&gt;<span class="code-function">sync</span>(<span class="code-variable">$data</span>);
+    }
+}</pre>
+                    </div>
+                </div>
+                <div class="code-block reveal">
+                    <div class="code-header">
+                        <span class="code-dot"></span>
+                        <span class="code-dot"></span>
+                        <span class="code-dot"></span>
+                        <span class="code-filename">model/AttackDsModel.php</span>
+                    </div>
+                    <div class="code-content">
+<pre><span class="code-keyword">&lt;?php</span>
+
+<span class="code-keyword">namespace</span> <span class="code-namespace">model</span>;
+
+<span class="code-keyword">class</span> <span class="code-class">AttackDsModel</span> <span class="code-keyword">extends</span> <span class="code-class">baseModel</span>
+{
+    <span class="code-keyword">public function</span> <span class="code-function">getData</span>(): <span class="code-keyword">mixed</span>
+    {
+        <span class="code-keyword">return</span> <span class="code-keyword">self</span>::<span class="code-function">queryRaw</span>(
+            <span class="code-string">'SELECT * FROM `'</span> .
+            <span class="code-keyword">self</span>::<span class="code-function">getTableName</span>() .
+            <span class="code-string">'`'</span>
+        )-&gt;<span class="code-function">fetchAll</span>();
+    }
+
+    <span class="code-keyword">public function</span> <span class="code-function">sync</span>(<span class="code-keyword">array</span> <span class="code-variable">$data</span>): <span class="code-keyword">void</span>
+    {
+        <span class="code-keyword">foreach</span> (<span class="code-variable">$data</span> <span class="code-keyword">as</span> <span class="code-variable">$item</span>) {
+            <span class="code-comment">// 同步逻辑...</span>
+        }
+    }
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 架构图 -->
+    <section class="section" id="architecture">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-badge">🏗️ 架构设计</span>
+                <h2 class="section-title">清晰的分层架构</h2>
+                <p class="section-desc">每一层各司其职，让代码更加易于理解和维护</p>
+            </div>
+            <div class="arch-visual reveal">
+                <div class="arch-box">
+                    <div class="arch-box-icon">🌐</div>
+                    <div class="arch-box-title">请求入口</div>
+                    <div class="arch-box-desc">CLI / WEB</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-icon">🎛️</div>
+                    <div class="arch-box-title">Controller</div>
+                    <div class="arch-box-desc">请求处理</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-icon">⚙️</div>
+                    <div class="arch-box-title">Service</div>
+                    <div class="arch-box-desc">业务逻辑</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-icon">🗄️</div>
+                    <div class="arch-box-title">Model</div>
+                    <div class="arch-box-desc">数据操作</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 下载区 -->
+    <section class="section section-alt download-section" id="download">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-badge">📦 立即下载</span>
+                <h2 class="section-title">开始您的项目</h2>
+                <p class="section-desc">选择您喜欢的方式获取 Longphp</p>
+            </div>
+            <div class="download-cards reveal">
+                <a href="https://github.com/yuwenlong/longphp" target="_blank" class="download-card">
+                    <div class="download-icon">⭐</div>
+                    <div class="download-title">GitHub</div>
+                    <div class="download-desc">获取最新源码</div>
+                </a>
+                <a href="https://gitee.com/longphp/longphp" target="_blank" class="download-card">
+                    <div class="download-icon">🔗</div>
+                    <div class="download-title">Gitee</div>
+                    <div class="download-desc">国内镜像</div>
+                </a>
+                <a href="https://gitee.com/longphp/longphp/blob/master/README.md" target="_blank" class="download-card">
+                    <div class="download-icon">📖</div>
+                    <div class="download-title">文档</div>
+                    <div class="download-desc">详细使用说明</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-icon">🐉</span>
+                <span class="logo-text">Longphp</span>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/yuwenlong/longphp" target="_blank">GitHub</a>
+                <a href="https://gitee.com/longphp/longphp" target="_blank">Gitee</a>
+                <a href="https://www.yuwenlong.cn/" target="_blank">作者博客</a>
+                <a href="http://license.coscl.org.cn/MulanPSL2" target="_blank">木兰宽松许可证 v2</a>
+            </div>
+            <p class="footer-copyright">
+                © 2024 Powered by <a href="https://www.yuwenlong.cn/" target="_blank">于文龙</a> · 
+                <a href="https://beian.miit.gov.cn/" target="_blank">京ICP备2022003683号-3</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 滚动动画
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                if (rect.top < windowHeight * 0.85) {
+                    el.classList.add('active');
+                }
             });
-        </script>
-    </body>
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 数字动画
+        const animateValue = (element, start, end, duration) => {
+            const range = end - start;
+            const startTime = performance.now();
+            
+            const update = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(start + range * easeOut);
+                element.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            };
+            
+            requestAnimationFrame(update);
+        };
+
+        // 初始化数字动画
+        const statsSection = document.querySelector('.hero-stats');
+        let statsAnimated = false;
+
+        const checkStats = () => {
+            if (statsAnimated) return;
+            
+            const rect = statsSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.9) {
+                statsAnimated = true;
+                const statValue = document.querySelector('.stat-value');
+                if (statValue && statValue.textContent === '0') {
+                    animateValue(statValue, 0, 0, 1000);
+                }
+            }
+        };
+
+        window.addEventListener('scroll', checkStats);
+        checkStats();
+    </script>
+</body>
 </html>
